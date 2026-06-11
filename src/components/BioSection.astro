@@ -1,0 +1,20 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { artistProfile } from '@data/artistProfile';
+---
+
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+    <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-4">
+      <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-gradient-to-br from-fog/10 via-ash to-acid/10 p-6">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Portrait placeholder</p>
+        <p class="text-xs uppercase tracking-[0.24em] text-acid">{artistProfile.portraitImage}</p>
+      </div>
+    </div>
+    <div class="self-center">
+      <SectionHeading eyebrow="Bio" title="Kai / FLAWS DJ" />
+      <p class="text-xl font-semibold leading-8 text-fog">{artistProfile.shortBio}</p>
+      <p class="mt-6 text-base leading-8 text-muted">{artistProfile.longBio}</p>
+    </div>
+  </div>
+</section>

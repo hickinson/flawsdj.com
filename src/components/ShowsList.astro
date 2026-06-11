@@ -1,0 +1,14 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import ShowCard from './ShowCard.astro';
+import { shows } from '@data/shows';
+---
+
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl">
+    <SectionHeading eyebrow="Shows" title="Dates" copy="Placeholder events are intentionally marked until verified announcements and ticket links are available." />
+    <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] px-5 sm:px-8">
+      {shows.map((show) => <ShowCard show={show} />)}
+    </div>
+  </div>
+</section>

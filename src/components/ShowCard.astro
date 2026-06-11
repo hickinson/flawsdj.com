@@ -1,0 +1,17 @@
+---
+import type { Show } from '@data/types';
+
+type Props = { show: Show };
+const { show } = Astro.props;
+const date = new Date(`${show.date}T12:00:00Z`);
+const formatted = new Intl.DateTimeFormat('en', { month: 'short', day: '2-digit', year: 'numeric', timeZone: 'UTC' }).format(date);
+---
+
+<article class="grid gap-4 border-t border-fog/10 py-6 sm:grid-cols-[9rem_1fr_auto] sm:items-center">
+  <time datetime={show.date} class="text-sm font-black uppercase tracking-[0.28em] text-acid">{formatted}</time>
+  <div>
+    <h3 class="text-2xl font-black uppercase tracking-[-0.04em] text-fog">{show.title}</h3>
+    <p class="mt-2 text-sm uppercase tracking-[0.18em] text-muted">{show.venue} · {show.city}</p>
+  </div>
+  {show.ticketUrl ? <a class="focus-ring rounded-full border border-fog/20 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-fog hover:border-acid hover:text-acid" href={show.ticketUrl}>Tickets</a> : <span class="text-xs font-bold uppercase tracking-[0.22em] text-muted">{show.status}</span>}
+</article>

@@ -1,0 +1,25 @@
+---
+import { artistProfile } from '@data/artistProfile';
+const navItems = [
+  { label: 'Music', href: '/music/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Shows', href: '/shows/' },
+  { label: 'EPK', href: '/epk/' },
+  { label: 'Contact', href: '/contact/' },
+];
+---
+
+<header class="sticky top-0 z-30 border-b border-fog/10 bg-ink/82 backdrop-blur-xl">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8" aria-label="Primary navigation">
+    <a href="/" class="focus-ring group inline-flex items-center gap-3 rounded-full" aria-label={`${artistProfile.name} home`}>
+      <span class="h-3 w-3 rounded-full bg-acid shadow-[0_0_28px_rgba(184,255,44,0.85)]"></span>
+      <span class="text-sm font-black uppercase tracking-[0.32em] text-fog group-hover:text-acid">{artistProfile.name}</span>
+    </a>
+    <div class="hidden items-center gap-5 md:flex">
+      {navItems.map((item) => (
+        <a class="focus-ring rounded-full text-xs font-bold uppercase tracking-[0.24em] text-muted transition hover:text-acid" href={item.href}>{item.label}</a>
+      ))}
+    </div>
+    <a href="/contact/" class="focus-ring rounded-full border border-acid/50 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-acid transition hover:bg-acid hover:text-ink">Booking</a>
+  </nav>
+</header>
