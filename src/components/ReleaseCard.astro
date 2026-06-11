@@ -1,0 +1,20 @@
+---
+import type { Release } from '@data/types';
+
+type Props = { release: Release };
+const { release } = Astro.props;
+---
+
+<article class="group rounded-[1.75rem] border border-fog/10 bg-fog/[0.03] p-4 transition hover:border-acid/60">
+  <a href={`/music/${release.slug}/`} class="focus-ring block rounded-[1.35rem]">
+    <div class="flex aspect-square flex-col justify-between rounded-[1.35rem] border border-fog/10 bg-gradient-to-br from-fog/10 via-ash to-acid/10 p-5">
+      <p class="text-xs font-bold uppercase tracking-[0.28em] text-muted">Artwork placeholder</p>
+      <p class="text-xs uppercase tracking-[0.22em] text-acid">{release.artwork}</p>
+    </div>
+    <div class="p-2 pt-5">
+      <p class="text-xs font-bold uppercase tracking-[0.3em] text-acid">{release.type} · {release.year}</p>
+      <h3 class="mt-3 text-2xl font-black uppercase tracking-[-0.04em] text-fog group-hover:text-acid">{release.title}</h3>
+      <p class="mt-3 text-sm leading-6 text-muted">{release.summary}</p>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,19 @@
+---
+import MusicLinks from '@components/MusicLinks.astro';
+import ReleaseCard from '@components/ReleaseCard.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { releases } from '@data/releases';
+---
+
+<BaseLayout title="Music" description="Placeholder music archive and listening links for Kai / FLAWS DJ." pathname="/music/">
+  <section class="px-4 py-20 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <SectionHeading eyebrow="Music" title="Releases and mixes" copy="Replace placeholder release entries with verified artwork, track lists and links as they become available." />
+      <div class="grid gap-5 md:grid-cols-3">
+        {releases.map((release) => <ReleaseCard release={release} />)}
+      </div>
+    </div>
+  </section>
+  <MusicLinks />
+</BaseLayout>

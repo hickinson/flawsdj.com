@@ -1,0 +1,18 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { primaryLinks } from '@data/links';
+---
+
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl">
+    <SectionHeading eyebrow="Gateway" title="Music links" copy="External links first. No heavy embeds are loaded by default, keeping the site fast and mobile-first." />
+    <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {primaryLinks.map((link) => (
+        <a class="focus-ring group rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 transition hover:border-acid/70 hover:bg-acid/10" href={link.href}>
+          <span class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{link.note}</span>
+          <span class="mt-8 block text-2xl font-black uppercase tracking-[-0.04em] text-fog group-hover:text-acid">{link.label}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

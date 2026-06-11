@@ -1,0 +1,44 @@
+---
+import ButtonLink from '@components/ButtonLink.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { releases } from '@data/releases';
+import type { Release } from '@data/types';
+
+interface Props {
+  release: Release;
+}
+
+export function getStaticPaths() {
+  return releases.map((release) => ({ params: { slug: release.slug }, props: { release } }));
+}
+
+const { release } = Astro.props;
+---
+
+<BaseLayout title={release.title} description={release.summary} pathname={`/music/${release.slug}/`} image={release.artwork} type="article">
+  <section class="px-4 py-20 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+      <div class="flex aspect-square flex-col justify-between rounded-[2rem] border border-fog/10 bg-gradient-to-br from-acid/15 via-ash to-fog/5 p-6">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Artwork placeholder</p>
+        <p class="text-xs uppercase tracking-[0.24em] text-acid">{release.artwork}</p>
+      </div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.36em] text-acid">{release.type} · {release.year} · {release.status}</p>
+        <h1 class="mt-5 text-5xl font-black uppercase leading-none tracking-[-0.06em] text-fog sm:text-7xl">{release.title}</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-muted">{release.summary}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          {release.links.map((link) => <ButtonLink href={link.href} variant="primary">{link.label}</ButtonLink>)}
+          <ButtonLink href="/music/">All music</ButtonLink>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto mt-12 max-w-7xl rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6">
+      <h2 class="text-xs font-bold uppercase tracking-[0.36em] text-acid">Track list</h2>
+      <ol class="mt-5 grid gap-3">
+        {release.tracks.map((track, index) => (
+          <li class="flex items-center gap-4 border-t border-fog/10 py-4 text-fog"><span class="text-muted">{String(index + 1).padStart(2, '0')}</span>{track}</li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+import { artistProfile } from '@data/artistProfile';
+import { socialLinks } from '@data/links';
+---
+
+<footer class="border-t border-fog/10 px-4 py-10 sm:px-6 lg:px-8">
+  <div class="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1fr_auto] md:items-end">
+    <div>
+      <p class="text-xl font-black uppercase tracking-[-0.03em] text-fog">{artistProfile.name}</p>
+      <p class="mt-2 max-w-xl text-sm leading-6 text-muted">PLACEHOLDER content. Replace all links, assets and contact details before public launch.</p>
+    </div>
+    <div class="flex flex-wrap gap-4 md:justify-end">
+      {socialLinks.map((link) => (
+        <a class="focus-ring rounded-full text-xs font-bold uppercase tracking-[0.22em] text-muted transition hover:text-acid" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+    <p class="text-xs uppercase tracking-[0.24em] text-muted/70 md:col-span-2">© {new Date().getFullYear()} {artistProfile.name}. Static site for Cloudflare Pages.</p>
+  </div>
+</footer>

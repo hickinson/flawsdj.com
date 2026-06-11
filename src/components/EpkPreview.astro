@@ -1,0 +1,29 @@
+---
+import ButtonLink from './ButtonLink.astro';
+import SectionHeading from './SectionHeading.astro';
+import { epkAssets } from '@data/epkAssets';
+import { pressQuotes } from '@data/press';
+---
+
+<section class="px-4 py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl">
+    <SectionHeading eyebrow="EPK" title="Press-ready essentials" copy="A simple static EPK surface for bio, selected links, placeholder assets and verified press quotes once available." />
+    <div class="grid gap-4 lg:grid-cols-3">
+      {epkAssets.map((asset) => (
+        <a class="focus-ring rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 transition hover:border-acid/70" href={asset.href}>
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{asset.note}</p>
+          <h3 class="mt-8 text-2xl font-black uppercase tracking-[-0.04em] text-fog">{asset.label}</h3>
+        </a>
+      ))}
+    </div>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      {pressQuotes.map((quote) => (
+        <blockquote class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-6">
+          <p class="text-lg leading-8 text-fog">“{quote.quote}”</p>
+          <cite class="mt-5 block text-xs font-bold not-italic uppercase tracking-[0.28em] text-acid">{quote.source}</cite>
+        </blockquote>
+      ))}
+    </div>
+    <ButtonLink href="/epk/" variant="primary" class="mt-8">Open EPK</ButtonLink>
+  </div>
+</section>
