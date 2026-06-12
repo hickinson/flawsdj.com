@@ -1,0 +1,1 @@
+Phase 2 Codex prompt placeholder. Replace with the full prompt from ChatGPT.
