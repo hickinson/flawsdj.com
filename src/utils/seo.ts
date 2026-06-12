@@ -5,11 +5,11 @@ export type SeoProps = {
   description?: string;
   image?: string;
   pathname?: string;
-  type?: 'website' | 'article';
+  type?: 'website' | 'article' | 'profile';
 };
 
 export function buildSeo({ title, description, image, pathname = '/', type = 'website' }: SeoProps = {}) {
-  const siteTitle = title ? `${title} · ${artistProfile.name}` : artistProfile.seo.defaultTitle;
+  const siteTitle = title ? `${title} | ${artistProfile.name}` : artistProfile.seo.defaultTitle;
   const siteDescription = description ?? artistProfile.seo.defaultDescription;
   const canonicalPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
   const canonicalUrl = new URL(canonicalPath, artistProfile.siteUrl).toString();

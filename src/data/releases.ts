@@ -2,43 +2,43 @@ import type { Release } from './types';
 
 export const releases: Release[] = [
   {
-    slug: 'signal-decay',
-    title: 'Signal Decay',
+    slug: 'motion',
+    title: 'Motion',
     type: 'EP',
-    year: '2026',
-    status: 'PLACEHOLDER — forthcoming / date TBC',
+    year: '2019',
+    status: 'Released August 2019',
+    label: 'Platform 22',
     summary:
-      'PLACEHOLDER — a compact statement of pressure-system drums, stripped synth lines and acid-green voltage.',
-    artwork: '/images/releases/placeholder-signal-decay.jpg',
-    links: [
-      { label: 'Listen', href: 'https://soundcloud.com/placeholder', note: 'PLACEHOLDER' },
-      { label: 'Buy', href: 'https://bandcamp.com/placeholder', note: 'PLACEHOLDER' },
-    ],
-    tracks: ['PLACEHOLDER — Track 01', 'PLACEHOLDER — Track 02', 'PLACEHOLDER — Track 03'],
+      'Debut FLAWS EP released on Platform 22, the label founded by Kai in 2019. Streaming and purchase links should be added only when approved URLs are supplied.',
+    links: [],
+    tracks: [],
   },
   {
-    slug: 'basement-index',
-    title: 'Basement Index',
-    type: 'Single',
-    year: '2025',
-    status: 'PLACEHOLDER',
+    slug: 'float-records-2020-eps',
+    title: 'FLOAT Records EPs',
+    type: 'EP',
+    year: '2020',
+    status: 'Three EPs released in 2020',
+    label: 'FLOAT Records',
     summary:
-      'PLACEHOLDER — functional low-light club material with a direct line to late-set momentum.',
-    artwork: '/images/releases/placeholder-basement-index.jpg',
-    links: [{ label: 'Listen', href: 'https://open.spotify.com/artist/placeholder', note: 'PLACEHOLDER' }],
-    tracks: ['PLACEHOLDER — Basement Index'],
+      'A group of three FLAWS EPs released on FLOAT Records in 2020 after label boss TWR72 reached out. Add individual titles, artwork, track lists and links when verified.',
+    links: [],
+    tracks: [],
   },
+];
+
+export const mixes: Release[] = [
   {
-    slug: 'afterimage-mix',
-    title: 'Afterimage Mix',
+    slug: 'mixes-coming-soon',
+    title: 'DJ mixes and live sets',
     type: 'Mix',
-    year: '2025',
-    status: 'PLACEHOLDER',
+    year: 'TBC',
+    status: 'Links TBC',
     summary:
-      'PLACEHOLDER — a recorded session mapping dub pressure, broken techno and minimal acid fragments.',
-    artwork: '/images/releases/placeholder-afterimage-mix.jpg',
-    links: [{ label: 'Listen', href: 'https://soundcloud.com/placeholder', note: 'PLACEHOLDER' }],
-    tracks: ['PLACEHOLDER — 60 minute mix'],
+      'A dedicated space for approved FLAWS mixes and live recordings. No mix links have been supplied for Phase 2.',
+    links: [],
+    tracks: [],
+    isPlaceholder: true,
   },
 ];
 

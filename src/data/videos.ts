@@ -2,9 +2,10 @@ import type { Video } from './types';
 
 export const videos: Video[] = [
   {
-    title: 'PLACEHOLDER — FLAWS DJ live excerpt',
-    description: 'A lightweight video feature slot with a thumbnail and external link instead of an initial heavy embed.',
-    thumbnail: '/images/videos/placeholder-live-excerpt.jpg',
-    href: 'https://youtube.com/@placeholder',
+    title: 'Latest mixes',
+    description:
+      'Approved mix and live-set links have not yet been supplied. This section is prepared for lightweight external links rather than heavy embeds above the fold.',
+    type: 'Mix',
+    isPlaceholder: true,
   },
 ];

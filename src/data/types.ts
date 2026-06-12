@@ -2,18 +2,21 @@ export type LinkItem = {
   label: string;
   href: string;
   note?: string;
+  isPlaceholder?: boolean;
 };
 
 export type Release = {
   slug: string;
   title: string;
-  type: string;
+  type: 'EP' | 'Single' | 'Mix' | 'Live Set';
   year: string;
   status: string;
+  label?: string;
   summary: string;
-  artwork: string;
+  artwork?: string;
   links: LinkItem[];
   tracks: string[];
+  isPlaceholder?: boolean;
 };
 
 export type Show = {
@@ -23,16 +26,29 @@ export type Show = {
   venue: string;
   status: string;
   ticketUrl?: string;
+  isPast?: boolean;
+  isPlaceholder?: boolean;
 };
 
 export type Video = {
   title: string;
   description: string;
-  thumbnail: string;
-  href: string;
+  thumbnail?: string;
+  href?: string;
+  type: 'Mix' | 'Live Set' | 'Video';
+  isPlaceholder?: boolean;
 };
 
 export type PressQuote = {
   quote: string;
   source: string;
+  isPlaceholder?: boolean;
+};
+
+export type MediaAsset = {
+  label: string;
+  href?: string;
+  alt: string;
+  note: string;
+  isPlaceholder?: boolean;
 };
