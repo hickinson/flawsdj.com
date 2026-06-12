@@ -1,11 +1,10 @@
 ---
-import SectionHeading from './SectionHeading.astro';
 import { artistProfile } from '@data/artistProfile';
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl border-y border-fog/10 py-14">
-    <SectionHeading eyebrow="Statement" title="Minimal signal, maximum pressure" />
-    <p class="max-w-4xl text-2xl font-semibold leading-tight tracking-[-0.03em] text-fog sm:text-4xl">{artistProfile.statement}</p>
+    <p class="text-xs font-bold uppercase tracking-[0.34em] text-muted">Sound</p>
+    <p class="mt-8 max-w-5xl text-3xl font-semibold leading-tight tracking-[-0.04em] text-fog sm:text-5xl">{artistProfile.statement}</p>
   </div>
 </section>

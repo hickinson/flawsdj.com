@@ -1,12 +1,24 @@
-import type { PressQuote } from './types';
+import type { MediaAsset, PressQuote } from './types';
 
-export const pressQuotes: PressQuote[] = [
+export const pressQuotes: PressQuote[] = [];
+
+export const pressImages: MediaAsset[] = [
   {
-    quote: 'PLACEHOLDER — Replace with a verified short press quote once coverage is available.',
-    source: 'PLACEHOLDER — Publication / writer',
+    label: 'Hero press image',
+    alt: 'Approved black and white press portrait of FLAWS for official website hero placement.',
+    note: 'PLACEHOLDER — add approved hero image in public/images/hero/ when supplied.',
+    isPlaceholder: true,
   },
   {
-    quote: 'PLACEHOLDER — A second quote can highlight live energy, sound or release context.',
-    source: 'PLACEHOLDER — Promoter / platform',
+    label: 'Portrait press image',
+    alt: 'Approved portrait of FLAWS for biography and EPK use.',
+    note: 'PLACEHOLDER — add approved portrait image in public/images/press/ when supplied.',
+    isPlaceholder: true,
+  },
+  {
+    label: 'Live image',
+    alt: 'Approved live image of FLAWS performing a DJ set.',
+    note: 'PLACEHOLDER — add approved live image in public/images/press/ when supplied.',
+    isPlaceholder: true,
   },
 ];

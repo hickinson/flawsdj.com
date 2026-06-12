@@ -3,24 +3,27 @@ import ButtonLink from './ButtonLink.astro';
 import { artistProfile } from '@data/artistProfile';
 ---
 
-<section class="relative overflow-hidden px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-  <div class="absolute inset-x-6 top-8 -z-10 h-80 rounded-full bg-acid/10 blur-3xl"></div>
-  <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-    <div>
-      <p class="mb-5 text-xs font-black uppercase tracking-[0.5em] text-acid">Kai / official artist site</p>
-      <h1 class="max-w-5xl text-6xl font-black uppercase leading-[0.84] tracking-[-0.08em] text-fog sm:text-8xl lg:text-9xl">{artistProfile.name}</h1>
-      <p class="mt-8 max-w-2xl text-lg leading-8 text-muted sm:text-xl">{artistProfile.tagline}</p>
-      <div class="mt-10 flex flex-wrap gap-3">
-        <ButtonLink href="/music/" variant="primary">Enter music</ButtonLink>
-        <ButtonLink href="/epk/">View EPK</ButtonLink>
+<section class="relative min-h-[calc(100svh-73px)] overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_70%_20%,rgba(245,245,245,0.12),transparent_24rem)]"></div>
+  <div class="mx-auto grid min-h-[calc(100svh-9rem)] max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+    <div class="pb-6 pt-12 lg:pb-14">
+      <p class="mb-6 text-xs font-bold uppercase tracking-[0.48em] text-muted">Official artist website</p>
+      <h1 class="max-w-5xl text-[clamp(4.8rem,17vw,15rem)] font-black uppercase leading-[0.76] tracking-[-0.1em] text-fog">{artistProfile.name}</h1>
+      <p class="mt-8 text-lg font-semibold uppercase tracking-[0.3em] text-fog">{artistProfile.artistType}</p>
+      <p class="mt-5 max-w-xl text-lg leading-8 text-muted">{artistProfile.tagline}</p>
+      <div class="mt-10 flex flex-wrap gap-3" aria-label="Primary actions">
+        <ButtonLink href="/music/" variant="primary">Listen</ButtonLink>
+        <ButtonLink href="/shows/">Gigs</ButtonLink>
+        <ButtonLink href="/epk/">EPK</ButtonLink>
+        <ButtonLink href="/contact/">Booking</ButtonLink>
       </div>
     </div>
-    <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-4 shadow-2xl shadow-black/40">
-      <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-gradient-to-br from-fog/10 via-ash to-acid/10 p-6">
-        <p class="text-xs font-bold uppercase tracking-[0.34em] text-muted">Image placeholder</p>
+    <div class="relative rounded-[2rem] border border-fog/10 bg-panel/35 p-4 shadow-2xl shadow-black/60">
+      <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(135deg,rgba(245,245,245,0.13),rgba(24,24,24,0.7)_42%,rgba(0,0,0,0.92))] p-6">
+        <p class="text-xs font-bold uppercase tracking-[0.34em] text-muted">Press image pending</p>
         <div>
-          <p class="text-sm uppercase tracking-[0.28em] text-acid">{artistProfile.heroImage}</p>
-          <p class="mt-4 text-2xl font-black uppercase tracking-[-0.04em] text-fog">Replace with approved artist photography.</p>
+          <p class="text-xs uppercase tracking-[0.28em] text-muted">Place approved hero image in public/images/hero/</p>
+          <p class="mt-4 max-w-sm text-2xl font-black uppercase leading-none tracking-[-0.04em] text-fog">Minimal visual frame reserved for official photography.</p>
         </div>
       </div>
     </div>

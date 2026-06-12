@@ -6,19 +6,19 @@ import { latestRelease } from '@data/releases';
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
-    <SectionHeading eyebrow="Latest" title="Current release" />
-    <div class="grid gap-8 rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-5 md:grid-cols-[0.85fr_1.15fr] md:p-8">
-      <div class="flex aspect-square flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-gradient-to-br from-acid/15 via-ash to-fog/5 p-6">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Artwork placeholder</p>
-        <p class="text-xs uppercase tracking-[0.24em] text-acid">{latestRelease.artwork}</p>
+    <SectionHeading eyebrow="Latest releases" title="Selected music" />
+    <div class="grid gap-8 rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-5 md:grid-cols-[0.82fr_1.18fr] md:p-8">
+      <div class="flex aspect-square flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(140deg,rgba(245,245,245,0.1),rgba(24,24,24,0.82)_48%,rgba(0,0,0,0.96))] p-6">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{latestRelease.label}</p>
+        <p class="text-xs uppercase tracking-[0.24em] text-muted">Artwork pending</p>
       </div>
       <div class="self-end">
-        <p class="text-xs font-bold uppercase tracking-[0.35em] text-acid">{latestRelease.type} · {latestRelease.status}</p>
+        <p class="text-xs font-bold uppercase tracking-[0.35em] text-muted">{latestRelease.type} · {latestRelease.status}</p>
         <h3 class="mt-4 text-4xl font-black uppercase tracking-[-0.05em] text-fog sm:text-6xl">{latestRelease.title}</h3>
         <p class="mt-5 max-w-2xl text-lg leading-8 text-muted">{latestRelease.summary}</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <ButtonLink href={`/music/${latestRelease.slug}/`} variant="primary">Release page</ButtonLink>
-          {latestRelease.links.map((link) => <ButtonLink href={link.href}>{link.label}</ButtonLink>)}
+          <ButtonLink href="/music/">Music archive</ButtonLink>
         </div>
       </div>
     </div>

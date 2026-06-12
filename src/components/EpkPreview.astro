@@ -1,29 +1,50 @@
 ---
 import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
+import { artistProfile } from '@data/artistProfile';
 import { epkAssets } from '@data/epkAssets';
-import { pressQuotes } from '@data/press';
+import { primaryLinks } from '@data/links';
+import { pressImages, pressQuotes } from '@data/press';
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
-    <SectionHeading eyebrow="EPK" title="Press-ready essentials" copy="A simple static EPK surface for bio, selected links, placeholder assets and verified press quotes once available." />
-    <div class="grid gap-4 lg:grid-cols-3">
+    <SectionHeading eyebrow="EPK" title="Press / media essentials" copy="A static, press-ready structure for biography, highlights, media assets and official profile links. Downloads are only enabled once approved assets exist." />
+    <div class="grid gap-4 lg:grid-cols-4">
+      {artistProfile.highlights.map((highlight) => (
+        <div class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-5">
+          <p class="text-sm leading-7 text-muted">{highlight}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 grid gap-4 lg:grid-cols-3">
+      {pressImages.map((asset) => (
+        <div class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-5">
+          <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.25rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.11),rgba(24,24,24,0.78)_50%,rgba(0,0,0,0.96))] p-5">
+            <p class="text-xs font-bold uppercase tracking-[0.28em] text-muted">{asset.label}</p>
+            <p class="text-xs leading-5 text-muted">{asset.note}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="mt-8 grid gap-4 lg:grid-cols-3">
       {epkAssets.map((asset) => (
-        <a class="focus-ring rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 transition hover:border-acid/70" href={asset.href}>
-          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{asset.note}</p>
-          <h3 class="mt-8 text-2xl font-black uppercase tracking-[-0.04em] text-fog">{asset.label}</h3>
-        </a>
+        <ButtonLink href={asset.href ?? '#'} disabled={asset.isPlaceholder}>{asset.label}</ButtonLink>
       ))}
     </div>
-    <div class="mt-6 grid gap-4 md:grid-cols-2">
-      {pressQuotes.map((quote) => (
-        <blockquote class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-6">
-          <p class="text-lg leading-8 text-fog">“{quote.quote}”</p>
-          <cite class="mt-5 block text-xs font-bold not-italic uppercase tracking-[0.28em] text-acid">{quote.source}</cite>
-        </blockquote>
-      ))}
+    {pressQuotes.length > 0 && (
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        {pressQuotes.map((quote) => (
+          <blockquote class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-6">
+            <p class="text-lg leading-8 text-fog">“{quote.quote}”</p>
+            <cite class="mt-5 block text-xs font-bold not-italic uppercase tracking-[0.28em] text-muted">{quote.source}</cite>
+          </blockquote>
+        ))}
+      </div>
+    )}
+    <div class="mt-8 flex flex-wrap gap-3">
+      <ButtonLink href="/epk/" variant="primary">Open EPK</ButtonLink>
+      {primaryLinks.map((link) => <ButtonLink href={link.href} external>{link.label}</ButtonLink>)}
     </div>
-    <ButtonLink href="/epk/" variant="primary" class="mt-8">Open EPK</ButtonLink>
   </div>
 </section>

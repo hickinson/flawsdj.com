@@ -1,18 +1,18 @@
 import type { Show } from './types';
 
-export const shows: Show[] = [
+export const shows: Show[] = [];
+
+export const pastShowNotes: Show[] = [
   {
-    date: '2026-09-18',
-    title: 'PLACEHOLDER — FLAWS DJ live / DJ set',
-    city: 'PLACEHOLDER — city TBC',
-    venue: 'PLACEHOLDER — venue TBC',
-    status: 'Details TBC',
-  },
-  {
-    date: '2026-10-24',
-    title: 'PLACEHOLDER — late room session',
-    city: 'PLACEHOLDER — city TBC',
-    venue: 'PLACEHOLDER — venue TBC',
-    status: 'Announce soon',
+    date: 'TBC',
+    title: 'Past cities include London, Marrakech, Manchester, Berlin, New York, Detroit and Chicago.',
+    city: 'International',
+    venue: 'Archive details TBC',
+    status: 'Archive to be manually verified',
+    isPast: true,
+    isPlaceholder: true,
   },
 ];
+
+export const showsDataNote =
+  'Shows are manually maintained for Phase 2. Resident Advisor auto-sync or scraping is not implemented; the RA profile is linked as an external source for promoters and fans.';

@@ -1,7 +1,7 @@
 import type { LinkItem } from './types';
 
 export const epkAssets: LinkItem[] = [
-  { label: 'Press photos', href: '/images/epk/placeholder-press-photo.zip', note: 'PLACEHOLDER path' },
-  { label: 'Logo / wordmark', href: '/images/epk/placeholder-logo-pack.zip', note: 'PLACEHOLDER path' },
-  { label: 'Tech rider', href: '/images/epk/placeholder-tech-rider.pdf', note: 'PLACEHOLDER path' },
+  { label: 'High-resolution press photos', href: '#', note: 'PLACEHOLDER — add approved downloads to public/downloads/', isPlaceholder: true },
+  { label: 'Logo / wordmark pack', href: '#', note: 'PLACEHOLDER — add only if approved assets are supplied', isPlaceholder: true },
+  { label: 'Technical rider', href: '#', note: 'PLACEHOLDER — add approved PDF when supplied', isPlaceholder: true },
 ];

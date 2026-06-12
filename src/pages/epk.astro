@@ -1,14 +1,16 @@
 ---
 import BioSection from '@components/BioSection.astro';
+import ContactCta from '@components/ContactCta.astro';
 import EpkPreview from '@components/EpkPreview.astro';
 import LatestRelease from '@components/LatestRelease.astro';
-import VideoFeature from '@components/VideoFeature.astro';
+import MusicLinks from '@components/MusicLinks.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="EPK" description="Static placeholder electronic press kit for Kai / FLAWS DJ." pathname="/epk/">
+<BaseLayout title="Press / Media / EPK" description="Official FLAWS DJ EPK with biography, highlights, media structure, music context and approved profile links." pathname="/epk/" type="profile">
   <EpkPreview />
-  <BioSection />
+  <BioSection variant="short" />
   <LatestRelease />
-  <VideoFeature />
+  <MusicLinks />
+  <ContactCta />
 </BaseLayout>

@@ -2,18 +2,26 @@
 import MusicLinks from '@components/MusicLinks.astro';
 import ReleaseCard from '@components/ReleaseCard.astro';
 import SectionHeading from '@components/SectionHeading.astro';
+import VideoFeature from '@components/VideoFeature.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { releases } from '@data/releases';
+import { mixes, releases } from '@data/releases';
 ---
 
-<BaseLayout title="Music" description="Placeholder music archive and listening links for Kai / FLAWS DJ." pathname="/music/">
+<BaseLayout title="Music" description="Music archive for FLAWS DJ, including verified releases and prepared sections for approved mixes and live sets." pathname="/music/">
   <section class="px-4 py-20 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
-      <SectionHeading eyebrow="Music" title="Releases and mixes" copy="Replace placeholder release entries with verified artwork, track lists and links as they become available." />
-      <div class="grid gap-5 md:grid-cols-3">
+      <SectionHeading eyebrow="Music" title="Releases" copy="Verified release facts from the Phase 2 content pack are included. Add artwork, track lists and links only when approved." />
+      <div class="grid gap-5 md:grid-cols-2">
         {releases.map((release) => <ReleaseCard release={release} />)}
+      </div>
+      <div class="mt-14">
+        <SectionHeading eyebrow="Mixes / live sets" title="Sessions" copy="This archive is ready for approved recordings without adding heavy embeds to the initial page load." />
+        <div class="grid gap-5 md:grid-cols-2">
+          {mixes.map((release) => <ReleaseCard release={release} />)}
+        </div>
       </div>
     </div>
   </section>
+  <VideoFeature />
   <MusicLinks />
 </BaseLayout>

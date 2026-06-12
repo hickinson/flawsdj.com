@@ -1,22 +1,22 @@
 ---
 import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
-import { artistProfile } from '@data/artistProfile';
+import { primaryLinks } from '@data/links';
 ---
 
 <section class="px-4 py-20 sm:px-6 lg:px-8">
-  <div class="mx-auto max-w-7xl rounded-[2rem] border border-acid/30 bg-acid/[0.08] p-6 sm:p-10">
-    <SectionHeading eyebrow="Contact" title="Booking, press and direct requests" copy="No real contact details are invented here. Replace the placeholders with verified contacts before launch." />
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="rounded-3xl border border-fog/10 bg-ink/40 p-5">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Booking</p>
-        <p class="mt-4 text-xl font-black uppercase tracking-[-0.03em] text-fog">{artistProfile.bookingEmail}</p>
-      </div>
-      <div class="rounded-3xl border border-fog/10 bg-ink/40 p-5">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Press</p>
-        <p class="mt-4 text-xl font-black uppercase tracking-[-0.03em] text-fog">{artistProfile.pressEmail}</p>
-      </div>
+  <div class="mx-auto max-w-7xl rounded-[2rem] border border-fog/10 bg-fog/[0.04] p-6 sm:p-10">
+    <SectionHeading eyebrow="Contact" title="Booking, press and direct requests" copy="No public email address or form backend has been approved for Phase 2. Use the official public profiles below until verified contact details are supplied." />
+    <div class="grid gap-4 md:grid-cols-3">
+      {['Booking enquiries', 'Press enquiries', 'General contact'].map((label) => (
+        <div class="rounded-3xl border border-fog/10 bg-ink/45 p-5">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{label}</p>
+          <p class="mt-4 text-sm leading-7 text-muted">Approved public contact details pending. Add a mailto link only after the address is explicitly approved.</p>
+        </div>
+      ))}
     </div>
-    <ButtonLink href="/contact/" class="mt-8">Contact page</ButtonLink>
+    <div class="mt-8 flex flex-wrap gap-3">
+      {primaryLinks.map((link) => <ButtonLink href={link.href} external>{link.label}</ButtonLink>)}
+    </div>
   </div>
 </section>
