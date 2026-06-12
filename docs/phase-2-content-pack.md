@@ -1,0 +1,1 @@
+Phase 2 content pack placeholder. Add approved artist bio, design direction, links, assets and page requirements here.
