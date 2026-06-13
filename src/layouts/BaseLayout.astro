@@ -16,6 +16,8 @@ const structuredData = {
   url: artistProfile.siteUrl,
   genre: artistProfile.genres,
   sameAs: socialLinks.map((link) => link.href),
+  ...(artistProfile.heroImage ? { image: new URL(artistProfile.heroImage, artistProfile.siteUrl).toString() } : {}),
+  email: artistProfile.bookingEmail,
   member: {
     '@type': 'Person',
     name: artistProfile.legalName,

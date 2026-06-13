@@ -1,19 +1,18 @@
 ---
 import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
+import { artistProfile } from '@data/artistProfile';
 import { primaryLinks } from '@data/links';
 ---
 
 <section class="px-4 py-20 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl rounded-[2rem] border border-fog/10 bg-fog/[0.04] p-6 sm:p-10">
-    <SectionHeading eyebrow="Contact" title="Booking, press and direct requests" copy="No public email address or form backend has been approved for Phase 2. Use the official public profiles below until verified contact details are supplied." />
-    <div class="grid gap-4 md:grid-cols-3">
-      {['Booking enquiries', 'Press enquiries', 'General contact'].map((label) => (
-        <div class="rounded-3xl border border-fog/10 bg-ink/45 p-5">
-          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{label}</p>
-          <p class="mt-4 text-sm leading-7 text-muted">Approved public contact details pending. Add a mailto link only after the address is explicitly approved.</p>
-        </div>
-      ))}
+    <SectionHeading eyebrow="Contact" title="Booking, press and direct requests" copy={`${artistProfile.name} is represented by ${artistProfile.representation}. Use the approved representation email for booking, press and general enquiries.`} />
+    <div class="rounded-3xl border border-fog/10 bg-ink/45 p-5">
+      <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Representation</p>
+      <p class="mt-4 text-2xl font-black uppercase tracking-[-0.04em] text-fog">{artistProfile.representation}</p>
+      <a class="focus-ring mt-4 inline-flex rounded-full text-sm font-bold text-muted underline-offset-4 transition hover:text-fog hover:underline" href={`mailto:${artistProfile.bookingEmail}`}>{artistProfile.bookingEmail}</a>
+      <p class="mt-4 text-sm leading-7 text-muted">No phone number or contact form is published on this website.</p>
     </div>
     <div class="mt-8 flex flex-wrap gap-3">
       {primaryLinks.map((link) => <ButtonLink href={link.href} external>{link.label}</ButtonLink>)}

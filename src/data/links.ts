@@ -8,11 +8,4 @@ export const primaryLinks: LinkItem[] = [
 
 export const socialLinks: LinkItem[] = primaryLinks;
 
-export const futureMusicLinks: LinkItem[] = [
-  { label: 'Spotify', href: '#', note: 'PLACEHOLDER — add approved artist URL when supplied', isPlaceholder: true },
-  { label: 'SoundCloud', href: '#', note: 'PLACEHOLDER — add approved artist URL when supplied', isPlaceholder: true },
-  { label: 'Bandcamp', href: '#', note: 'PLACEHOLDER — add approved artist URL when supplied', isPlaceholder: true },
-  { label: 'YouTube', href: '#', note: 'PLACEHOLDER — add approved artist URL when supplied', isPlaceholder: true },
-  { label: 'Apple Music', href: '#', note: 'PLACEHOLDER — add approved artist URL when supplied', isPlaceholder: true },
-  { label: 'Beatport', href: '#', note: 'PLACEHOLDER — add approved artist URL when supplied', isPlaceholder: true },
-];
+export const futureMusicLinks: LinkItem[] = [];
