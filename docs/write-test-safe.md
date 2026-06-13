@@ -1,1 +1,0 @@
-Phase 3 safe write test.
