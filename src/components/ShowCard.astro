@@ -3,7 +3,7 @@ import type { Show } from '@data/types';
 
 type Props = { show: Show };
 const { show } = Astro.props;
-const dateLabel = show.date === 'TBC' ? 'TBC' : new Intl.DateTimeFormat('en', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(show.date));
+const dateLabel = new Intl.DateTimeFormat('en', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(show.date));
 ---
 
 <article class="grid gap-4 border-t border-fog/10 py-6 first:border-t-0 md:grid-cols-[0.24fr_1fr_auto] md:items-center">

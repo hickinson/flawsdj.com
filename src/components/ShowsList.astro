@@ -3,7 +3,7 @@ import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
 import ShowCard from './ShowCard.astro';
 import { primaryLinks } from '@data/links';
-import { pastShowNotes, shows, showsDataNote } from '@data/shows';
+import { pastShowNotes, showArchiveNote, shows, showsDataNote } from '@data/shows';
 
 const raLink = primaryLinks.find((link) => link.label === 'Resident Advisor');
 ---
@@ -15,13 +15,14 @@ const raLink = primaryLinks.find((link) => link.label === 'Resident Advisor');
       {shows.length > 0 ? shows.map((show) => <ShowCard show={show} />) : (
         <div class="py-10">
           <p class="text-2xl font-black uppercase tracking-[-0.04em] text-fog">Dates to be announced.</p>
-          <p class="mt-4 max-w-2xl text-base leading-7 text-muted">No verified upcoming events have been supplied for Phase 2. Follow official channels for announcements.</p>
+          <p class="mt-4 max-w-2xl text-base leading-7 text-muted">Follow the official Resident Advisor profile and social channels for announcements.</p>
         </div>
       )}
     </div>
     <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
-      <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] px-5 sm:px-8">
-        {pastShowNotes.map((show) => <ShowCard show={show} />)}
+      <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6 sm:p-8">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Archive note</p>
+        {pastShowNotes.length > 0 ? pastShowNotes.map((show) => <ShowCard show={show} />) : <p class="mt-5 text-sm leading-7 text-muted">{showArchiveNote}</p>}
       </div>
       <aside class="rounded-[2rem] border border-fog/10 bg-panel/35 p-6">
         <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Manual data note</p>

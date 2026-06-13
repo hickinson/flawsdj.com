@@ -13,7 +13,8 @@ export function buildSeo({ title, description, image, pathname = '/', type = 'we
   const siteDescription = description ?? artistProfile.seo.defaultDescription;
   const canonicalPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
   const canonicalUrl = new URL(canonicalPath, artistProfile.siteUrl).toString();
-  const imageUrl = image ? new URL(image, artistProfile.siteUrl).toString() : undefined;
+  const fallbackImage = artistProfile.heroImage || undefined;
+  const imageUrl = image || fallbackImage ? new URL(image ?? fallbackImage!, artistProfile.siteUrl).toString() : undefined;
 
   return {
     title: siteTitle,

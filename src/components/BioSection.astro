@@ -11,12 +11,16 @@ const shortParagraphs = artistProfile.shortBio.split('\n\n');
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-    <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-4">
-      <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.12),rgba(24,24,24,0.78)_48%,rgba(0,0,0,0.95))] p-6">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Biography image pending</p>
-        <p class="text-xs uppercase tracking-[0.24em] text-muted">Use approved portrait assets only</p>
-      </div>
-    </div>
+    <figure class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-4">
+      {artistProfile.portraitImage ? (
+        <img class="aspect-[4/5] w-full rounded-[1.5rem] object-cover" src={artistProfile.portraitImage} alt={artistProfile.portraitImageAlt} loading="lazy" decoding="async" />
+      ) : (
+        <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.12),rgba(24,24,24,0.78)_48%,rgba(0,0,0,0.95))] p-6">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Biography visual</p>
+          <p class="text-xs uppercase tracking-[0.24em] text-muted">Approved photography to be added through a binary-safe asset workflow</p>
+        </div>
+      )}
+    </figure>
     <div class="self-center">
       <SectionHeading eyebrow="Biography" title={variant === 'long' ? 'Press-ready biography' : 'Kai Hickinson / FLAWS'} />
       <div class="space-y-6 text-base leading-8 text-muted sm:text-lg">
