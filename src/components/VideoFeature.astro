@@ -1,24 +1,24 @@
 ---
 import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
-import { videos } from '@data/videos';
+import { videos, videosEmptyState } from '@data/videos';
 const video = videos[0];
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
-    <SectionHeading eyebrow="Latest mixes" title="Recorded sessions" copy="Prepared for approved DJ mixes and live sets using external links, avoiding heavy embeds on initial page load." />
-    <div class="grid gap-8 rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-5 md:grid-cols-[1.15fr_0.85fr] md:p-8">
-      <div class="flex aspect-video flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(135deg,rgba(245,245,245,0.1),rgba(24,24,24,0.8)_52%,rgba(0,0,0,0.96))] p-6">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Mix artwork pending</p>
-        <p class="text-xs uppercase tracking-[0.24em] text-muted">External audio/video links TBC</p>
-      </div>
-      <div class="self-end">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{video.type}</p>
-        <h3 class="mt-3 text-3xl font-black uppercase tracking-[-0.04em] text-fog">{video.title}</h3>
-        <p class="mt-4 text-base leading-7 text-muted">{video.description}</p>
-        {video.href ? <ButtonLink href={video.href} class="mt-8" external>Open link</ButtonLink> : <ButtonLink href="/music/" class="mt-8">Music page</ButtonLink>}
-      </div>
+    <SectionHeading eyebrow="Mixes" title="Recorded sessions" copy="Approved DJ mixes and live recordings will be linked as lightweight external resources when supplied." />
+    <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-5 md:p-8">
+      {video ? (
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{video.type}</p>
+          <h3 class="mt-3 text-3xl font-black uppercase tracking-[-0.04em] text-fog">{video.title}</h3>
+          <p class="mt-4 text-base leading-7 text-muted">{video.description}</p>
+          {video.href && <ButtonLink href={video.href} class="mt-8" external>Open link</ButtonLink>}
+        </div>
+      ) : (
+        <p class="text-2xl font-black uppercase tracking-[-0.04em] text-fog">{videosEmptyState}</p>
+      )}
     </div>
   </div>
 </section>

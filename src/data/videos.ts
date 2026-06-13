@@ -1,11 +1,4 @@
 import type { Video } from './types';
 
-export const videos: Video[] = [
-  {
-    title: 'Latest mixes',
-    description:
-      'Approved mix and live-set links have not yet been supplied. This section is prepared for lightweight external links rather than heavy embeds above the fold.',
-    type: 'Mix',
-    isPlaceholder: true,
-  },
-];
+export const videos: Video[] = [];
+export const videosEmptyState = 'Approved mixes and live recordings will be added here when supplied.';

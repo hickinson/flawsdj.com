@@ -19,8 +19,8 @@ const { release } = Astro.props;
   <section class="px-4 py-20 sm:px-6 lg:px-8">
     <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
       <div class="flex aspect-square flex-col justify-between rounded-[2rem] border border-fog/10 bg-[linear-gradient(140deg,rgba(245,245,245,0.1),rgba(24,24,24,0.82)_48%,rgba(0,0,0,0.96))] p-6">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{release.label ?? 'Artwork pending'}</p>
-        <p class="text-xs uppercase tracking-[0.24em] text-muted">{release.artwork ?? 'Add approved artwork under public/images/releases/'}</p>
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{release.label ?? release.type}</p>
+        <p class="text-xs uppercase tracking-[0.24em] text-muted">{release.status}</p>
       </div>
       <div>
         <p class="text-xs font-bold uppercase tracking-[0.36em] text-muted">{release.type} · {release.year} · {release.status}</p>
@@ -42,7 +42,7 @@ const { release } = Astro.props;
           ))}
         </ol>
       ) : (
-        <p class="mt-5 text-sm leading-7 text-muted">Track list not supplied for Phase 2. Add verified tracks in <code>src/data/releases.ts</code> when approved.</p>
+        <p class="mt-5 text-sm leading-7 text-muted">Track list details have not been supplied. Add verified tracks in <code>src/data/releases.ts</code> when approved.</p>
       )}
     </div>
   </section>

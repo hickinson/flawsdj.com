@@ -2,14 +2,14 @@
 import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
 import { artistProfile } from '@data/artistProfile';
-import { epkAssets } from '@data/epkAssets';
+import { epkAssets, epkDownloadsNote } from '@data/epkAssets';
 import { primaryLinks } from '@data/links';
 import { pressImages, pressQuotes } from '@data/press';
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
-    <SectionHeading eyebrow="EPK" title="Press / media essentials" copy="A static, press-ready structure for biography, highlights, media assets and official profile links. Downloads are only enabled once approved assets exist." />
+    <SectionHeading eyebrow="EPK" title="Press / media essentials" copy="Official biography, highlights, media structure and profile links for FLAWS." />
     <div class="grid gap-4 lg:grid-cols-4">
       {artistProfile.highlights.map((highlight) => (
         <div class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-5">
@@ -17,21 +17,23 @@ import { pressImages, pressQuotes } from '@data/press';
         </div>
       ))}
     </div>
-    <div class="mt-8 grid gap-4 lg:grid-cols-3">
+    <div class="mt-8 grid gap-4 md:grid-cols-3">
       {pressImages.map((asset) => (
-        <div class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-5">
-          <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.25rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.11),rgba(24,24,24,0.78)_50%,rgba(0,0,0,0.96))] p-5">
+        <figure class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-3">
+          <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.25rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.11),rgba(24,24,24,0.78)_50%,rgba(0,0,0,0.96))] p-5" role="img" aria-label={asset.alt}>
             <p class="text-xs font-bold uppercase tracking-[0.28em] text-muted">{asset.label}</p>
             <p class="text-xs leading-5 text-muted">{asset.note}</p>
           </div>
-        </div>
+        </figure>
       ))}
     </div>
-    <div class="mt-8 grid gap-4 lg:grid-cols-3">
-      {epkAssets.map((asset) => (
-        <ButtonLink href={asset.href ?? '#'} disabled={asset.isPlaceholder}>{asset.label}</ButtonLink>
-      ))}
-    </div>
+    {epkAssets.length > 0 ? (
+      <div class="mt-8 grid gap-4 lg:grid-cols-3">
+        {epkAssets.map((asset) => <ButtonLink href={asset.href} external={asset.href.startsWith('http')}>{asset.label}</ButtonLink>)}
+      </div>
+    ) : (
+      <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">{epkDownloadsNote}</p>
+    )}
     {pressQuotes.length > 0 && (
       <div class="mt-6 grid gap-4 md:grid-cols-2">
         {pressQuotes.map((quote) => (
