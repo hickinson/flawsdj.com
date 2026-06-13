@@ -23,6 +23,7 @@ const hasHeroImage = publicAssetExists(artistProfile.heroImage);
     </div>
     <figure class="relative rounded-[2rem] border border-fog/10 bg-panel/35 p-4 shadow-2xl shadow-black/60">
       {hasHeroImage ? (
+      {artistProfile.heroImage ? (
         <img class="aspect-[4/5] w-full rounded-[1.5rem] object-cover grayscale" src={artistProfile.heroImage} alt={artistProfile.heroImageAlt} loading="eager" decoding="async" />
       ) : (
         <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(135deg,rgba(245,245,245,0.13),rgba(24,24,24,0.7)_42%,rgba(0,0,0,0.92))] p-6">

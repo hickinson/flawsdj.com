@@ -14,6 +14,10 @@ export const artistProfile = {
   portraitImage: '/images/press/flaws-upshot-colour.jpg',
   heroImageAlt: 'Black and white low-angle portrait of FLAWS standing among tall trees.',
   portraitImageAlt: 'Colour low-angle portrait of FLAWS standing among tall trees in a black shirt.',
+  heroImage: '',
+  portraitImage: '',
+  heroImageAlt: '',
+  portraitImageAlt: '',
   shortBio:
     'FLAWS, Kai Hickinson, is a rhythm-led techno DJ, producer and label owner currently based in the Netherlands. His sound combines punchy kicks, pressurised basslines, swinging polyrhythmic percussion, icy bleeps, levitating pads and staccato hi-hats into music that is focused, physical, hypnotic and emotionally deep.\n\nBorn and raised outside Peterborough, England, Kai grew up around his father’s record collection before being drawn into the worlds of Kerri Chandler, DJ Deep, Steve Bug, Roni Size and DJ EZ. The productions of Jeff Mills and Robert Hood later sharpened his attraction to futuristic rhythms and sound design.\n\nHe began producing in 2018, founded Platform 22 in 2019 and released his debut FLAWS EP, Motion, on the label in August 2019. FLOAT Records label boss TWR72 later reached out, leading to three FLAWS EPs on FLOAT in 2020. His development as a DJ has included links with Rene Wise, MARRØN and Eerste Communie, where he was invited to play several times and later became a resident.',
   longBio: [
