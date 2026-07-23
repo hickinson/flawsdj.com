@@ -10,12 +10,12 @@ import { mixes, mixesEmptyState, releases } from '@data/releases';
 <BaseLayout title="Music" description="Music archive for FLAWS, including verified release facts and space for approved mixes and live recordings." pathname="/music/">
   <section class="px-4 py-20 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
-      <SectionHeading eyebrow="Music" title="Releases" copy="Only verified release facts are included. Artwork, track lists and external links should be added only when approved." />
+      <SectionHeading eyebrow="Music" title="Releases" copy="Selected FLAWS releases. Additional catalogue details and listening links will appear as they become available." />
       <div class="grid gap-5 md:grid-cols-2">
         {releases.map((release) => <ReleaseCard release={release} />)}
       </div>
       <div class="mt-14">
-        <SectionHeading eyebrow="Mixes / live sets" title="Sessions" copy="Approved recordings will be added as lightweight external links when supplied." />
+        <SectionHeading eyebrow="Mixes / live sets" title="Sessions" copy="Recorded sessions will be linked here when available." />
         {mixes.length > 0 ? (
           <div class="grid gap-5 md:grid-cols-2">
             {mixes.map((release) => <ReleaseCard release={release} />)}
