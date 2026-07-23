@@ -2,7 +2,7 @@ export const artistProfile = {
   name: 'FLAWS',
   legalName: 'Kai Hickinson',
   artistType: 'DJ / Producer',
-  genres: ['hypnotic techno', 'deep techno', 'rhythm-led techno', 'underground techno'],
+  genres: ['hypnotic techno', 'deep techno', 'rhythm-led techno'],
   tagline: 'Hypnotic, deep, rhythm-led techno shaped for pressure, swing and restraint.',
   location: 'Netherlands',
   origin: 'outside Peterborough, England',
