@@ -2,6 +2,7 @@ export type LinkItem = {
   label: string;
   href: string;
   note?: string;
+  download?: boolean | string;
   isPlaceholder?: boolean;
 };
 
@@ -50,5 +51,6 @@ export type MediaAsset = {
   href?: string;
   alt: string;
   note: string;
+  orientation?: 'portrait' | 'landscape';
   isPlaceholder?: boolean;
 };
