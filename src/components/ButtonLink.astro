@@ -6,21 +6,31 @@ type Props = {
   class?: string;
   external?: boolean;
   disabled?: boolean;
+  download?: boolean | string;
 };
-const { href, label, variant = 'secondary', class: className = '', external = href.startsWith('http'), disabled = false } = Astro.props;
+const {
+  href,
+  label,
+  variant = 'secondary',
+  class: className = '',
+  external = href.startsWith('http'),
+  disabled = false,
+  download = false,
+} = Astro.props;
 const styles = {
   primary: 'border-fog bg-fog text-ink hover:bg-transparent hover:text-fog',
   secondary: 'border-fog/20 bg-fog/[0.03] text-fog hover:border-fog hover:bg-fog/10',
   ghost: 'border-transparent text-muted hover:text-fog',
 };
-const target = external && !disabled ? '_blank' : undefined;
-const rel = external && !disabled ? 'noreferrer' : undefined;
+const target = external && !disabled && !download ? '_blank' : undefined;
+const rel = external && !disabled && !download ? 'noreferrer' : undefined;
 ---
 
 <a
   href={disabled ? undefined : href}
   target={target}
   rel={rel}
+  download={!disabled && download ? download : undefined}
   aria-disabled={disabled ? 'true' : undefined}
   class={`focus-ring inline-flex items-center justify-center rounded-full border px-5 py-3 text-xs font-bold uppercase tracking-[0.24em] transition ${styles[variant]} ${disabled ? 'pointer-events-none opacity-45' : ''} ${className}`}
 >

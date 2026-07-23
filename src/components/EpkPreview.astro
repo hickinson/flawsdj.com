@@ -13,10 +13,13 @@ const availableMediaAssets = pressImages.flatMap((asset) => {
   return [{ ...asset, href: asset.href }];
 });
 
-const hasPressImages = availableMediaAssets.length > 0;
-const hasEpkAssets = epkAssets.length > 0;
+const isEpkPage = Astro.url.pathname === '/epk/';
+const displayedMediaAssets = isEpkPage ? availableMediaAssets : availableMediaAssets.slice(0, 2);
+const availableDownloads = epkAssets.filter((asset) => publicAssetExists(asset.href));
+const hasPressImages = displayedMediaAssets.length > 0;
+const hasEpkAssets = availableDownloads.length > 0;
 const hasPressQuotes = pressQuotes.length > 0;
-const showEpkLink = Astro.url.pathname !== '/epk/';
+const showEpkLink = !isEpkPage;
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
@@ -32,13 +35,35 @@ const showEpkLink = Astro.url.pathname !== '/epk/';
     </div>
 
     {hasPressImages ? (
-      <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {availableMediaAssets.map((asset) => (
+      <div class="mt-8 grid items-start gap-4 md:grid-cols-2">
+        {displayedMediaAssets.map((asset) => (
           <figure class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-3">
-            <img class="aspect-[4/5] w-full rounded-[1.25rem] object-cover" src={asset.href} alt={asset.alt} loading="lazy" decoding="async" />
+            <a
+              class="focus-ring block overflow-hidden rounded-[1.25rem] bg-black"
+              href={asset.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open full-size ${asset.label.toLowerCase()}`}
+            >
+              <img
+                class={`w-full object-cover transition duration-500 hover:scale-[1.01] ${asset.orientation === 'landscape' ? 'aspect-[3/2]' : 'aspect-[2/3]'}`}
+                src={asset.href}
+                alt={asset.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <figcaption class="p-3">
               <p class="text-xs font-bold uppercase tracking-[0.28em] text-fog">{asset.label}</p>
               <p class="mt-2 text-xs leading-5 text-muted">{asset.note}</p>
+              <a
+                class="focus-ring mt-4 inline-flex rounded-full text-xs font-bold uppercase tracking-[0.22em] text-muted underline-offset-4 transition hover:text-fog hover:underline"
+                href={asset.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View full size
+              </a>
             </figcaption>
           </figure>
         ))}
@@ -47,14 +72,23 @@ const showEpkLink = Astro.url.pathname !== '/epk/';
       <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">Approved press photography will be available here soon.</p>
     )}
 
-    {hasEpkAssets ? (
-      <div class="mt-8 grid gap-4 lg:grid-cols-3">
-        {epkAssets.map((asset) => (
-          <ButtonLink href={asset.href} external={asset.href.startsWith('http')}>{asset.label}</ButtonLink>
-        ))}
-      </div>
-    ) : (
-      <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">{epkDownloadsNote}</p>
+    {isEpkPage && (
+      hasEpkAssets ? (
+        <div class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 md:p-6">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Press downloads</p>
+          <p class="mt-3 max-w-2xl text-sm leading-7 text-muted">{epkDownloadsNote}</p>
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            {availableDownloads.map((asset) => (
+              <div class="rounded-2xl border border-fog/10 bg-ink/40 p-4">
+                <ButtonLink href={asset.href} download={asset.download} class="w-full">{asset.label}</ButtonLink>
+                {asset.note && <p class="mt-3 text-xs leading-5 text-muted">{asset.note}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">{epkDownloadsNote}</p>
+      )
     )}
 
     {hasPressQuotes && (
