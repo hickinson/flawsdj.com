@@ -61,6 +61,7 @@ Real content lives in local TypeScript data files:
 
 Approved public assets are stored under:
 
+- `public/brand/`
 - `public/images/hero/`
 - `public/images/press/`
 - `public/images/releases/`
@@ -87,15 +88,18 @@ Included:
 - Approved Instagram, Resident Advisor and Facebook links.
 - Approved representation email for Linda Nilsson / Parabel.
 - Verified release facts for `Motion` and the grouped FLOAT Records 2020 EPs.
-- Static image paths, safe missing-asset handling and an EPK media structure ready for approved web assets.
+- Web-ready hero, portrait, press and live photography with safe missing-asset handling.
+- Direct EPK image downloads using approved local photography.
+- Production-ready black, white and square-avatar SVG brand assets.
 
-Still missing until supplied, optimised and approved for publication:
+Still missing until supplied, verified and approved for publication:
 
-- Web-ready hero, portrait, press, live and logo files in the repository.
 - Individual FLOAT EP titles, artwork, track lists and external listen/buy links.
+- At least one approved public destination where visitors can hear FLAWS music.
 - Approved mixes or live recordings.
 - Confirmed upcoming event cards and verified archive details.
 - Press quotes and publication references.
-- Downloadable EPK PDFs, ZIPs, logo packs or riders.
+- Downloadable EPK PDFs, ZIP packs, technical riders or hospitality riders.
+- Production Cloudflare Pages deployment and final domain/DNS validation.
 
 Never add fake content to fill these gaps. Intentional empty states should remain factual and visitor-facing.
