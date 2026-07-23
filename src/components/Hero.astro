@@ -25,11 +25,11 @@ const hasHeroImage = publicAssetExists(artistProfile.heroImage);
       {hasHeroImage ? (
         <img class="aspect-[4/5] w-full rounded-[1.5rem] object-cover grayscale" src={artistProfile.heroImage} alt={artistProfile.heroImageAlt} loading="eager" decoding="async" />
       ) : (
-        <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(135deg,rgba(245,245,245,0.13),rgba(24,24,24,0.7)_42%,rgba(0,0,0,0.92))] p-6">
-          <p class="text-xs font-bold uppercase tracking-[0.34em] text-muted">Official photography reviewed</p>
+        <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(135deg,rgba(245,245,245,0.13),rgba(24,24,24,0.7)_42%,rgba(0,0,0,0.92))] p-6" role="img" aria-label="FLAWS artist identity panel">
+          <p class="text-xs font-bold uppercase tracking-[0.34em] text-muted">FLAWS</p>
           <div>
-            <p class="text-xs uppercase tracking-[0.28em] text-muted">Text-only PR flow</p>
-            <p class="mt-4 max-w-sm text-2xl font-black uppercase leading-none tracking-[-0.04em] text-fog">Approved images will be connected when binary assets can be delivered.</p>
+            <p class="text-xs uppercase tracking-[0.28em] text-muted">Netherlands</p>
+            <p class="mt-4 max-w-sm text-2xl font-black uppercase leading-none tracking-[-0.04em] text-fog">Hypnotic. Deep. Rhythm-led.</p>
           </div>
         </div>
       )}
