@@ -7,13 +7,24 @@ import { primaryLinks } from '@data/links';
 import { pressImages, pressQuotes } from '@data/press';
 import { publicAssetExists } from '@utils/assets';
 
-const mediaAssets = pressImages.map((asset) => ({ ...asset, isAvailable: publicAssetExists(asset.href) }));
+const mediaAssets = pressImages.map((asset) => {
+  const isAvailable = publicAssetExists(asset.href);
+
+  return {
+    ...asset,
+    isAvailable,
+  };
+});
+
+const hasPressImages = mediaAssets.length > 0;
+const hasEpkAssets = epkAssets.length > 0;
+const hasPressQuotes = pressQuotes.length > 0;
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
     <SectionHeading eyebrow="EPK" title="Press / media essentials" copy="Official biography, highlights, approved media assets and profile links for FLAWS." />
-    <SectionHeading eyebrow="EPK" title="Press / media essentials" copy="Official biography, highlights, media structure and profile links for FLAWS." />
+
     <div class="grid gap-4 lg:grid-cols-4">
       {artistProfile.highlights.map((highlight) => (
         <div class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-5">
@@ -21,39 +32,41 @@ const mediaAssets = pressImages.map((asset) => ({ ...asset, isAvailable: publicA
         </div>
       ))}
     </div>
-    <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {mediaAssets.map((asset) => (
-        <figure class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-3">
-          {asset.isAvailable && asset.href ? (
-            <img class="aspect-[4/5] w-full rounded-[1.25rem] object-cover" src={asset.href} alt={asset.alt} loading="lazy" decoding="async" />
-          ) : (
-            <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.25rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.11),rgba(24,24,24,0.78)_50%,rgba(0,0,0,0.96))] p-5" role="img" aria-label={asset.alt}>
-              <p class="text-xs font-bold uppercase tracking-[0.28em] text-muted">{asset.label}</p>
-              <p class="text-xs leading-5 text-muted">Image file not present in this checkout.</p>
-            </div>
-          )}
-          <figcaption class="p-3">
-            <p class="text-xs font-bold uppercase tracking-[0.28em] text-fog">{asset.label}</p>
-            <p class="mt-2 text-xs leading-5 text-muted">{asset.note}</p>
-          </figcaption>
-    <div class="mt-8 grid gap-4 md:grid-cols-3">
-      {pressImages.map((asset) => (
-        <figure class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-3">
-          <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.25rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.11),rgba(24,24,24,0.78)_50%,rgba(0,0,0,0.96))] p-5" role="img" aria-label={asset.alt}>
-            <p class="text-xs font-bold uppercase tracking-[0.28em] text-muted">{asset.label}</p>
-            <p class="text-xs leading-5 text-muted">{asset.note}</p>
-          </div>
-        </figure>
-      ))}
-    </div>
-    {epkAssets.length > 0 ? (
+
+    {hasPressImages ? (
+      <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {mediaAssets.map((asset) => (
+          <figure class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-3">
+            {asset.isAvailable && asset.href ? (
+              <img class="aspect-[4/5] w-full rounded-[1.25rem] object-cover" src={asset.href} alt={asset.alt} loading="lazy" decoding="async" />
+            ) : (
+              <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.25rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.11),rgba(24,24,24,0.78)_50%,rgba(0,0,0,0.96))] p-5" role="img" aria-label={asset.alt}>
+                <p class="text-xs font-bold uppercase tracking-[0.28em] text-muted">{asset.label}</p>
+                <p class="text-xs leading-5 text-muted">Image file not present in this checkout.</p>
+              </div>
+            )}
+            <figcaption class="p-3">
+              <p class="text-xs font-bold uppercase tracking-[0.28em] text-fog">{asset.label}</p>
+              <p class="mt-2 text-xs leading-5 text-muted">{asset.note}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    ) : (
+      <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">Press images can be added here when approved assets are supplied.</p>
+    )}
+
+    {hasEpkAssets ? (
       <div class="mt-8 grid gap-4 lg:grid-cols-3">
-        {epkAssets.map((asset) => <ButtonLink href={asset.href} external={asset.href.startsWith('http')}>{asset.label}</ButtonLink>)}
+        {epkAssets.map((asset) => (
+          <ButtonLink href={asset.href} external={asset.href.startsWith('http')}>{asset.label}</ButtonLink>
+        ))}
       </div>
     ) : (
       <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">{epkDownloadsNote}</p>
     )}
-    {pressQuotes.length > 0 && (
+
+    {hasPressQuotes && (
       <div class="mt-6 grid gap-4 md:grid-cols-2">
         {pressQuotes.map((quote) => (
           <blockquote class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-6">
@@ -63,9 +76,12 @@ const mediaAssets = pressImages.map((asset) => ({ ...asset, isAvailable: publicA
         ))}
       </div>
     )}
+
     <div class="mt-8 flex flex-wrap gap-3">
       <ButtonLink href="/epk/" variant="primary">Open EPK</ButtonLink>
-      {primaryLinks.map((link) => <ButtonLink href={link.href} external>{link.label}</ButtonLink>)}
+      {primaryLinks.map((link) => (
+        <ButtonLink href={link.href} external>{link.label}</ButtonLink>
+      ))}
     </div>
   </div>
 </section>

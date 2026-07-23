@@ -15,7 +15,6 @@ const hasPortraitImage = publicAssetExists(artistProfile.portraitImage);
   <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
     <figure class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-4">
       {hasPortraitImage ? (
-      {artistProfile.portraitImage ? (
         <img class="aspect-[4/5] w-full rounded-[1.5rem] object-cover" src={artistProfile.portraitImage} alt={artistProfile.portraitImageAlt} loading="lazy" decoding="async" />
       ) : (
         <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.12),rgba(24,24,24,0.78)_48%,rgba(0,0,0,0.95))] p-6">
