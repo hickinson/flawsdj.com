@@ -17,9 +17,12 @@ const hasPortraitImage = publicAssetExists(artistProfile.portraitImage);
       {hasPortraitImage ? (
         <img class="aspect-[4/5] w-full rounded-[1.5rem] object-cover" src={artistProfile.portraitImage} alt={artistProfile.portraitImageAlt} loading="lazy" decoding="async" />
       ) : (
-        <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.12),rgba(24,24,24,0.78)_48%,rgba(0,0,0,0.95))] p-6">
-          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Biography visual</p>
-          <p class="text-xs uppercase tracking-[0.24em] text-muted">Approved photography to be added through a binary-safe asset workflow</p>
+        <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.12),rgba(24,24,24,0.78)_48%,rgba(0,0,0,0.95))] p-6" role="img" aria-label="FLAWS biography identity panel">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Biography</p>
+          <div>
+            <p class="text-4xl font-black uppercase tracking-[-0.06em] text-fog">FLAWS</p>
+            <p class="mt-4 text-xs uppercase tracking-[0.24em] text-muted">DJ / Producer · Rhythm-led techno</p>
+          </div>
         </div>
       )}
     </figure>
