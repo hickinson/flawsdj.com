@@ -7,18 +7,16 @@ import { primaryLinks } from '@data/links';
 import { pressImages, pressQuotes } from '@data/press';
 import { publicAssetExists } from '@utils/assets';
 
-const mediaAssets = pressImages.map((asset) => {
-  const isAvailable = publicAssetExists(asset.href);
+const availableMediaAssets = pressImages.flatMap((asset) => {
+  if (!asset.href || !publicAssetExists(asset.href)) return [];
 
-  return {
-    ...asset,
-    isAvailable,
-  };
+  return [{ ...asset, href: asset.href }];
 });
 
-const hasPressImages = mediaAssets.length > 0;
+const hasPressImages = availableMediaAssets.length > 0;
 const hasEpkAssets = epkAssets.length > 0;
 const hasPressQuotes = pressQuotes.length > 0;
+const showEpkLink = Astro.url.pathname !== '/epk/';
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
@@ -35,16 +33,9 @@ const hasPressQuotes = pressQuotes.length > 0;
 
     {hasPressImages ? (
       <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {mediaAssets.map((asset) => (
+        {availableMediaAssets.map((asset) => (
           <figure class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-3">
-            {asset.isAvailable && asset.href ? (
-              <img class="aspect-[4/5] w-full rounded-[1.25rem] object-cover" src={asset.href} alt={asset.alt} loading="lazy" decoding="async" />
-            ) : (
-              <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.25rem] border border-fog/10 bg-[linear-gradient(145deg,rgba(245,245,245,0.11),rgba(24,24,24,0.78)_50%,rgba(0,0,0,0.96))] p-5" role="img" aria-label={asset.alt}>
-                <p class="text-xs font-bold uppercase tracking-[0.28em] text-muted">{asset.label}</p>
-                <p class="text-xs leading-5 text-muted">Image file not present in this checkout.</p>
-              </div>
-            )}
+            <img class="aspect-[4/5] w-full rounded-[1.25rem] object-cover" src={asset.href} alt={asset.alt} loading="lazy" decoding="async" />
             <figcaption class="p-3">
               <p class="text-xs font-bold uppercase tracking-[0.28em] text-fog">{asset.label}</p>
               <p class="mt-2 text-xs leading-5 text-muted">{asset.note}</p>
@@ -53,7 +44,7 @@ const hasPressQuotes = pressQuotes.length > 0;
         ))}
       </div>
     ) : (
-      <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">Press images can be added here when approved assets are supplied.</p>
+      <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">Approved press photography will be available here soon.</p>
     )}
 
     {hasEpkAssets ? (
@@ -78,7 +69,7 @@ const hasPressQuotes = pressQuotes.length > 0;
     )}
 
     <div class="mt-8 flex flex-wrap gap-3">
-      <ButtonLink href="/epk/" variant="primary">Open EPK</ButtonLink>
+      {showEpkLink && <ButtonLink href="/epk/" variant="primary">Open EPK</ButtonLink>}
       {primaryLinks.map((link) => (
         <ButtonLink href={link.href} external>{link.label}</ButtonLink>
       ))}
