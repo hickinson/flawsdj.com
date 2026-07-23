@@ -6,11 +6,11 @@ import { latestRelease } from '@data/releases';
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
-    <SectionHeading eyebrow="Latest releases" title="Selected music" />
+    <SectionHeading eyebrow="Featured release" title="Selected music" />
     <div class="grid gap-8 rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-5 md:grid-cols-[0.82fr_1.18fr] md:p-8">
       <div class="flex aspect-square flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(140deg,rgba(245,245,245,0.1),rgba(24,24,24,0.82)_48%,rgba(0,0,0,0.96))] p-6">
         <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">{latestRelease.label}</p>
-        <p class="text-xs uppercase tracking-[0.24em] text-muted">Verified release fact</p>
+        <p class="text-xs uppercase tracking-[0.24em] text-muted">{latestRelease.year}</p>
       </div>
       <div class="self-end">
         <p class="text-xs font-bold uppercase tracking-[0.35em] text-muted">{latestRelease.type} · {latestRelease.status}</p>
