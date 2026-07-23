@@ -21,7 +21,7 @@ export const releases: Release[] = [
     status: 'Three EPs released in 2020',
     label: 'FLOAT Records',
     summary:
-      'FLOAT Records released three FLAWS EPs in 2020 after label boss TWR72 reached out. Individual titles, artwork, track lists and links have not been supplied for this launch version.',
+      'FLOAT Records released three FLAWS EPs in 2020 after label boss TWR72 reached out. Individual titles, artwork, track lists and links are not currently available.',
     links: [],
     tracks: [],
   },
@@ -29,6 +29,6 @@ export const releases: Release[] = [
 
 export const mixes: Release[] = [];
 
-export const mixesEmptyState = 'Approved mixes and live recordings will be added here when supplied.';
+export const mixesEmptyState = 'Mixes and live recordings will be published here when available.';
 
 export const latestRelease = releases[0];
