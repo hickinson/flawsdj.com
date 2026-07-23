@@ -1,7 +1,7 @@
 ---
 import ButtonLink from '@components/ButtonLink.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { releases } from '@data/releases';
+import { mixes, releases } from '@data/releases';
 import type { Release } from '@data/types';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function getStaticPaths() {
-  return releases.map((release) => ({ params: { slug: release.slug }, props: { release } }));
+  return [...releases, ...mixes].map((release) => ({ params: { slug: release.slug }, props: { release } }));
 }
 
 const { release } = Astro.props;
@@ -42,7 +42,7 @@ const { release } = Astro.props;
           ))}
         </ol>
       ) : (
-        <p class="mt-5 text-sm leading-7 text-muted">Track list details have not been supplied. Add verified tracks in <code>src/data/releases.ts</code> when approved.</p>
+        <p class="mt-5 text-sm leading-7 text-muted">Track list details are not currently available.</p>
       )}
     </div>
   </section>
