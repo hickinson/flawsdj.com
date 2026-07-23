@@ -2,7 +2,7 @@
 
 Official static-first artist website and EPK for **FLAWS**.
 
-This launch-ready v1 is built for **Cloudflare Pages** with Astro, TypeScript and Tailwind CSS. It uses only approved local content and supplied promotional imagery. Do not add invented releases, shows, quotes, contacts, links or imagery.
+This pre-launch v1 is built for **Cloudflare Pages** with Astro, TypeScript and Tailwind CSS. It uses only approved local content. Do not add invented releases, shows, quotes, contacts, links or imagery.
 
 ## Stack
 
@@ -54,7 +54,7 @@ Real content lives in local TypeScript data files:
 - Artist profile, biography, contact email and SEO defaults: `src/data/artistProfile.ts`
 - Approved social links: `src/data/links.ts`
 - Releases and generated music pages: `src/data/releases.ts`
-- Shows/events and manual data notes: `src/data/shows.ts`
+- Shows/events and supporting notes: `src/data/shows.ts`
 - Mix/live-set records: `src/data/videos.ts` and `src/data/releases.ts`
 - Press images and quote records: `src/data/press.ts`
 - Downloadable EPK assets: `src/data/epkAssets.ts`
@@ -66,6 +66,8 @@ Approved public assets are stored under:
 - `public/images/releases/`
 - `public/images/misc/`
 - `public/downloads/`
+
+Keep binary media in small, dedicated asset PRs. Do not combine large image or PDF additions with broad code/content changes.
 
 ## Routes
 
@@ -85,14 +87,15 @@ Included:
 - Approved Instagram, Resident Advisor and Facebook links.
 - Approved representation email for Linda Nilsson / Parabel.
 - Verified release facts for `Motion` and the grouped FLOAT Records 2020 EPs.
-- Supplied hero, press portrait and live images.
+- Static image paths, safe missing-asset handling and an EPK media structure ready for approved web assets.
 
-Still missing until supplied and approved:
+Still missing until supplied, optimised and approved for publication:
 
+- Web-ready hero, portrait, press, live and logo files in the repository.
 - Individual FLOAT EP titles, artwork, track lists and external listen/buy links.
 - Approved mixes or live recordings.
 - Confirmed upcoming event cards and verified archive details.
 - Press quotes and publication references.
 - Downloadable EPK PDFs, ZIPs, logo packs or riders.
 
-Never add fake content to fill these gaps. Empty states are intentional and should remain factual.
+Never add fake content to fill these gaps. Intentional empty states should remain factual and visitor-facing.

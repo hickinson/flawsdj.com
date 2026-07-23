@@ -3,11 +3,15 @@ import type { Show } from '@data/types';
 
 type Props = { show: Show };
 const { show } = Astro.props;
-const dateLabel = new Intl.DateTimeFormat('en', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(show.date));
+const parsedDate = new Date(show.date);
+const hasValidDate = !Number.isNaN(parsedDate.getTime());
+const dateLabel = hasValidDate
+  ? new Intl.DateTimeFormat('en', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(parsedDate)
+  : show.date;
 ---
 
 <article class="grid gap-4 border-t border-fog/10 py-6 first:border-t-0 md:grid-cols-[0.24fr_1fr_auto] md:items-center">
-  <time class="text-xs font-bold uppercase tracking-[0.28em] text-muted" datetime={show.date}>{dateLabel}</time>
+  <time class="text-xs font-bold uppercase tracking-[0.28em] text-muted" datetime={hasValidDate ? show.date : undefined}>{dateLabel}</time>
   <div>
     <h3 class="text-2xl font-black uppercase tracking-[-0.04em] text-fog">{show.title}</h3>
     <p class="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-muted">{show.venue} · {show.city}</p>

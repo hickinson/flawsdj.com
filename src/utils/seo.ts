@@ -1,4 +1,5 @@
 import { artistProfile } from '@data/artistProfile';
+import { publicAssetExists } from './assets';
 
 export type SeoProps = {
   title?: string;
@@ -13,8 +14,12 @@ export function buildSeo({ title, description, image, pathname = '/', type = 'we
   const siteDescription = description ?? artistProfile.seo.defaultDescription;
   const canonicalPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
   const canonicalUrl = new URL(canonicalPath, artistProfile.siteUrl).toString();
-  const fallbackImage = artistProfile.heroImage || undefined;
-  const imageUrl = image || fallbackImage ? new URL(image ?? fallbackImage!, artistProfile.siteUrl).toString() : undefined;
+  const requestedImage = image ?? artistProfile.heroImage;
+  const hasUsableImage = Boolean(
+    requestedImage &&
+      (requestedImage.startsWith('https://') || requestedImage.startsWith('http://') || publicAssetExists(requestedImage)),
+  );
+  const imageUrl = requestedImage && hasUsableImage ? new URL(requestedImage, artistProfile.siteUrl).toString() : undefined;
 
   return {
     title: siteTitle,

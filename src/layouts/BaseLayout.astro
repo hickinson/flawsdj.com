@@ -4,10 +4,14 @@ import SiteHeader from '@components/SiteHeader.astro';
 import { artistProfile } from '@data/artistProfile';
 import { socialLinks } from '@data/links';
 import '@styles/global.css';
+import { publicAssetExists } from '@utils/assets';
 import { buildSeo, type SeoProps } from '@utils/seo';
 
 type Props = SeoProps;
 const seo = buildSeo(Astro.props);
+const heroImageUrl = publicAssetExists(artistProfile.heroImage)
+  ? new URL(artistProfile.heroImage, artistProfile.siteUrl).toString()
+  : undefined;
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'MusicGroup',
@@ -16,12 +20,8 @@ const structuredData = {
   url: artistProfile.siteUrl,
   genre: artistProfile.genres,
   sameAs: socialLinks.map((link) => link.href),
-  ...(artistProfile.heroImage ? { image: new URL(artistProfile.heroImage, artistProfile.siteUrl).toString() } : {}),
+  ...(heroImageUrl ? { image: heroImageUrl } : {}),
   email: artistProfile.bookingEmail,
-  member: {
-    '@type': 'Person',
-    name: artistProfile.legalName,
-  },
 };
 ---
 

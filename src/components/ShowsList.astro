@@ -10,7 +10,7 @@ const raLink = primaryLinks.find((link) => link.label === 'Resident Advisor');
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
-    <SectionHeading eyebrow="Gigs" title="Upcoming shows" copy="Confirmed event details will appear here once approved for public announcement." />
+    <SectionHeading eyebrow="Gigs" title="Upcoming shows" copy="Confirmed event details will appear here once announced." />
     <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] px-5 sm:px-8">
       {shows.length > 0 ? shows.map((show) => <ShowCard show={show} />) : (
         <div class="py-10">
@@ -21,11 +21,11 @@ const raLink = primaryLinks.find((link) => link.label === 'Resident Advisor');
     </div>
     <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
       <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6 sm:p-8">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Archive note</p>
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Touring</p>
         {pastShowNotes.length > 0 ? pastShowNotes.map((show) => <ShowCard show={show} />) : <p class="mt-5 text-sm leading-7 text-muted">{showArchiveNote}</p>}
       </div>
       <aside class="rounded-[2rem] border border-fog/10 bg-panel/35 p-6">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Manual data note</p>
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Latest announcements</p>
         <p class="mt-5 text-sm leading-7 text-muted">{showsDataNote}</p>
         {raLink && <ButtonLink href={raLink.href} external class="mt-6">Resident Advisor</ButtonLink>}
       </aside>

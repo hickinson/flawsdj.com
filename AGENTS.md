@@ -12,9 +12,9 @@
 - `src/pages/` contains route files.
 - `src/layouts/BaseLayout.astro` contains shared document structure and SEO metadata output.
 - `src/components/` contains reusable presentation components.
-- `src/data/` contains local placeholder content for artist profile, links, releases, shows, videos, press and EPK assets.
+- `src/data/` contains approved local content, intentionally empty collections and media metadata for the artist profile, links, releases, shows, videos, press and EPK assets.
 - `src/styles/global.css` contains Tailwind import, theme tokens and global atmosphere styles.
-- `public/` contains static files such as `robots.txt`, `_headers` and future approved image assets.
+- `public/` contains static files such as `robots.txt`, `_headers` and approved web-ready image/download assets.
 
 ## Build and test commands
 
@@ -32,11 +32,17 @@
 - Do not add Cloudflare Workers, server functions or runtime-only features for this version.
 - Do not add Vercel-specific files or configuration.
 
+## Content and asset rules
+
+- Do not add invented releases, shows, quotes, venues, labels, links, contacts, achievements, catalogue details or image assets.
+- Keep intentional empty states factual and visitor-facing; never expose internal PR, checkout, build or asset-workflow language in public components.
+- Do not publish telephone numbers unless explicitly approved.
+- Keep binary images and PDFs in small, dedicated asset PRs rather than mixing them into broad code/content PRs.
+- Verify that local image paths exist before emitting image elements, Open Graph metadata or structured-data image URLs.
+
 ## Do-not-overengineer rules
 
 - Do not add a CMS, database, authentication or admin system.
 - Prefer local TypeScript data files over extra tooling.
 - Prefer external music/video links over heavy embeds on initial page load.
-- Keep placeholder content clearly marked as `PLACEHOLDER` until verified.
-- Do not invent real contact details, press quotes, show details or asset files.
 - Keep components small, readable and static-friendly.
