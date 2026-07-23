@@ -13,11 +13,13 @@ const availableMediaAssets = pressImages.flatMap((asset) => {
   return [{ ...asset, href: asset.href }];
 });
 
+const isEpkPage = Astro.url.pathname === '/epk/';
+const displayedMediaAssets = isEpkPage ? availableMediaAssets : availableMediaAssets.slice(0, 2);
 const availableDownloads = epkAssets.filter((asset) => publicAssetExists(asset.href));
-const hasPressImages = availableMediaAssets.length > 0;
+const hasPressImages = displayedMediaAssets.length > 0;
 const hasEpkAssets = availableDownloads.length > 0;
 const hasPressQuotes = pressQuotes.length > 0;
-const showEpkLink = Astro.url.pathname !== '/epk/';
+const showEpkLink = !isEpkPage;
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
@@ -34,7 +36,7 @@ const showEpkLink = Astro.url.pathname !== '/epk/';
 
     {hasPressImages ? (
       <div class="mt-8 grid items-start gap-4 md:grid-cols-2">
-        {availableMediaAssets.map((asset) => (
+        {displayedMediaAssets.map((asset) => (
           <figure class="rounded-3xl border border-fog/10 bg-fog/[0.03] p-3">
             <a
               class="focus-ring block overflow-hidden rounded-[1.25rem] bg-black"
@@ -70,21 +72,23 @@ const showEpkLink = Astro.url.pathname !== '/epk/';
       <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">Approved press photography will be available here soon.</p>
     )}
 
-    {hasEpkAssets ? (
-      <div class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 md:p-6">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Press downloads</p>
-        <p class="mt-3 max-w-2xl text-sm leading-7 text-muted">{epkDownloadsNote}</p>
-        <div class="mt-6 grid gap-3 sm:grid-cols-2">
-          {availableDownloads.map((asset) => (
-            <div class="rounded-2xl border border-fog/10 bg-ink/40 p-4">
-              <ButtonLink href={asset.href} download={asset.download} class="w-full">{asset.label}</ButtonLink>
-              {asset.note && <p class="mt-3 text-xs leading-5 text-muted">{asset.note}</p>}
-            </div>
-          ))}
+    {isEpkPage && (
+      hasEpkAssets ? (
+        <div class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 md:p-6">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Press downloads</p>
+          <p class="mt-3 max-w-2xl text-sm leading-7 text-muted">{epkDownloadsNote}</p>
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            {availableDownloads.map((asset) => (
+              <div class="rounded-2xl border border-fog/10 bg-ink/40 p-4">
+                <ButtonLink href={asset.href} download={asset.download} class="w-full">{asset.label}</ButtonLink>
+                {asset.note && <p class="mt-3 text-xs leading-5 text-muted">{asset.note}</p>}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    ) : (
-      <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">{epkDownloadsNote}</p>
+      ) : (
+        <p class="mt-8 rounded-3xl border border-fog/10 bg-fog/[0.03] p-5 text-sm leading-7 text-muted">{epkDownloadsNote}</p>
+      )
     )}
 
     {hasPressQuotes && (
