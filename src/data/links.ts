@@ -95,6 +95,3 @@ export const epkLinks: LinkItem[] = [
   residentAdvisorLink,
   parabelProfileLink,
 ];
-
-export const primaryLinks: LinkItem[] = socialLinks;
-export const futureMusicLinks: LinkItem[] = [];
