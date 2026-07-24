@@ -42,13 +42,13 @@ const interviewsPlaylistLink: LinkItem = {
   note: 'Podcast appearances and interviews on SoundCloud.',
 };
 
-export const pressFeatures: LinkItem[] = [
-  {
-    label: 'The Beauty of Imperfection: FLAWS',
-    href: 'https://open.substack.com/pub/alessandradc/p/the-beauty-of-imperfection-flaws',
-    note: 'Feature article published on Substack.',
-  },
-];
+const substackFeatureLink: LinkItem = {
+  label: 'The Beauty of Imperfection: FLAWS',
+  href: 'https://open.substack.com/pub/alessandradc/p/the-beauty-of-imperfection-flaws',
+  note: 'Feature article published on Substack.',
+};
+
+export const pressFeatures: LinkItem[] = [substackFeatureLink];
 
 export const socialLinks: LinkItem[] = [
   soundCloudProfileLink,
@@ -91,7 +91,7 @@ export const epkLinks: LinkItem[] = [
   soundCloudProfileLink,
   releasesPlaylistLink,
   interviewsPlaylistLink,
-  pressFeatures[0],
+  substackFeatureLink,
   residentAdvisorLink,
   parabelProfileLink,
 ];
