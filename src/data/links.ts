@@ -63,13 +63,6 @@ export const officialProfileLinks: LinkItem[] = [...socialLinks, parabelProfileL
 
 export const musicDestinations: SoundCloudDestination[] = [
   {
-    label: 'Listen to FLAWS',
-    href: soundCloudProfileLink.href,
-    description: 'The official FLAWS SoundCloud profile.',
-    playerTitle: 'FLAWS SoundCloud profile player',
-    kind: 'profile',
-  },
-  {
     label: releasesPlaylistLink.label,
     href: releasesPlaylistLink.href,
     description: releasesPlaylistLink.note ?? '',
