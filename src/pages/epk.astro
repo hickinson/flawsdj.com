@@ -3,14 +3,12 @@ import BioSection from '@components/BioSection.astro';
 import ContactCta from '@components/ContactCta.astro';
 import EpkPreview from '@components/EpkPreview.astro';
 import LatestRelease from '@components/LatestRelease.astro';
-import MusicLinks from '@components/MusicLinks.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Press / Media / EPK" description="Official FLAWS EPK with biography, verified highlights, music context, press contacts and approved profile links." pathname="/epk/" type="profile">
+<BaseLayout title="Press / Media / EPK" description="Official FLAWS EPK with biography, verified highlights, music context, press contacts and approved professional links." pathname="/epk/" type="profile">
   <EpkPreview />
   <BioSection variant="short" />
   <LatestRelease />
-  <MusicLinks />
   <ContactCta />
 </BaseLayout>
