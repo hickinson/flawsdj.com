@@ -35,15 +35,23 @@ export type Release = {
   isPlaceholder?: boolean;
 };
 
+export type ShowSource = 'resident-advisor' | 'official' | 'promoter' | 'manual';
+
+export type ShowStatus = 'scheduled' | 'sold-out' | 'cancelled' | 'postponed';
+
 export type Show = {
-  date: string;
+  id: string;
+  startDate: string;
+  endDate?: string;
   title: string;
   city: string;
   venue: string;
-  status: string;
+  country?: string;
+  status?: ShowStatus;
+  eventUrl?: string;
   ticketUrl?: string;
-  isPast?: boolean;
-  isPlaceholder?: boolean;
+  raUrl?: string;
+  source?: ShowSource;
 };
 
 export type Video = {

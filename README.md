@@ -79,6 +79,18 @@ The Music page uses official SoundCloud embedded players for the approved releas
 - Keep the external SoundCloud fallback link for every player.
 - The privacy disclosure is published at `/privacy/`.
 
+## Events architecture
+
+All confirmed dates live in the single typed `shows` collection in `src/data/shows.ts`.
+
+- Resident Advisor and non-RA events use the same `Show` type and shared rendering components.
+- Dates use the strict `YYYY-MM-DD` format and are validated during the static build.
+- Upcoming and past lists are derived automatically rather than stored with an `isPast` flag.
+- RA listings use `raUrl`; ticketing and other official destinations use `ticketUrl` and `eventUrl`.
+- The source field is internal metadata and is not shown to visitors.
+- Upcoming events generate `MusicEvent` structured data from the same local records.
+- The site does not scrape Resident Advisor or depend on an undocumented event feed.
+
 ## Routes
 
 - `/`
@@ -104,11 +116,12 @@ Included:
 - Direct EPK image downloads using approved local photography.
 - Production-ready black, white and square-avatar SVG brand assets.
 - Privacy disclosure and click-to-load handling for third-party SoundCloud players.
+- Unified RA and non-RA event architecture with automatic sorting and structured data.
 
 Still missing until supplied, verified and approved for publication:
 
 - Individual FLOAT EP titles, track lists and external listen/buy links.
-- Confirmed upcoming event cards and verified archive details.
+- Confirmed upcoming event records and verified archive details.
 - Press quotes and publication references beyond the approved feature link.
 - Downloadable EPK PDFs, ZIP packs, technical riders or hospitality riders.
 - Production Cloudflare Pages deployment and final domain/DNS validation.

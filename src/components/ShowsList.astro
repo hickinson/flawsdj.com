@@ -3,30 +3,54 @@ import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
 import ShowCard from './ShowCard.astro';
 import { residentAdvisorLink } from '@data/links';
-import { pastShowNotes, showArchiveNote, shows, showsDataNote } from '@data/shows';
+import { showArchiveNote, shows, showsDataNote } from '@data/shows';
+import { getPastShows, getUpcomingShows } from '@utils/shows';
+
+type Props = {
+  variant?: 'preview' | 'full';
+};
+
+const { variant = 'full' } = Astro.props;
+const upcomingShows = getUpcomingShows(shows);
+const pastShows = getPastShows(shows);
+const displayedUpcomingShows = variant === 'preview' ? upcomingShows.slice(0, 3) : upcomingShows;
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
-    <SectionHeading eyebrow="Gigs" title="Upcoming shows" copy="Confirmed event details will appear here once announced." />
+    <SectionHeading eyebrow="Gigs" title="Upcoming shows" copy="Confirmed dates and official event links will appear here once announced." />
     <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] px-5 sm:px-8">
-      {shows.length > 0 ? shows.map((show) => <ShowCard show={show} />) : (
+      {displayedUpcomingShows.length > 0 ? displayedUpcomingShows.map((show) => <ShowCard show={show} />) : (
         <div class="py-10">
           <p class="text-2xl font-black uppercase tracking-[-0.04em] text-fog">Dates to be announced.</p>
           <p class="mt-4 max-w-2xl text-base leading-7 text-muted">Follow the official Resident Advisor profile and social channels for announcements.</p>
         </div>
       )}
     </div>
-    <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
-      <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6 sm:p-8">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Touring</p>
-        {pastShowNotes.length > 0 ? pastShowNotes.map((show) => <ShowCard show={show} />) : <p class="mt-5 text-sm leading-7 text-muted">{showArchiveNote}</p>}
+
+    {variant === 'preview' ? (
+      <div class="mt-6 flex flex-wrap gap-3">
+        <ButtonLink href="/shows/" variant="primary">All gigs</ButtonLink>
+        <ButtonLink href={residentAdvisorLink.href} external>Resident Advisor</ButtonLink>
       </div>
-      <aside class="rounded-[2rem] border border-fog/10 bg-panel/35 p-6">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Latest announcements</p>
-        <p class="mt-5 text-sm leading-7 text-muted">{showsDataNote}</p>
-        <ButtonLink href={residentAdvisorLink.href} external class="mt-6">Resident Advisor</ButtonLink>
-      </aside>
-    </div>
+    ) : (
+      <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
+        <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6 sm:p-8">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Past shows</p>
+          {pastShows.length > 0 ? (
+            <div class="mt-4">
+              {pastShows.map((show) => <ShowCard show={show} />)}
+            </div>
+          ) : (
+            <p class="mt-5 text-sm leading-7 text-muted">{showArchiveNote}</p>
+          )}
+        </div>
+        <aside class="rounded-[2rem] border border-fog/10 bg-panel/35 p-6">
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Latest announcements</p>
+          <p class="mt-5 text-sm leading-7 text-muted">{showsDataNote}</p>
+          <ButtonLink href={residentAdvisorLink.href} external class="mt-6">Resident Advisor</ButtonLink>
+        </aside>
+      </div>
+    )}
   </div>
 </section>

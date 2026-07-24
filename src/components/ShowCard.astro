@@ -1,20 +1,26 @@
 ---
+import ButtonLink from './ButtonLink.astro';
 import type { Show } from '@data/types';
+import { formatShowDate, getShowAction, getShowStatusLabel } from '@utils/shows';
 
 type Props = { show: Show };
 const { show } = Astro.props;
-const parsedDate = new Date(show.date);
-const hasValidDate = !Number.isNaN(parsedDate.getTime());
-const dateLabel = hasValidDate
-  ? new Intl.DateTimeFormat('en', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(parsedDate)
-  : show.date;
+const action = getShowAction(show);
+const status = show.status ?? 'scheduled';
+const showStatus = status === 'scheduled' ? undefined : getShowStatusLabel(status);
+const location = [show.venue, show.city, show.country].filter(Boolean).join(' · ');
 ---
 
-<article class="grid gap-4 border-t border-fog/10 py-6 first:border-t-0 md:grid-cols-[0.24fr_1fr_auto] md:items-center">
-  <time class="text-xs font-bold uppercase tracking-[0.28em] text-muted" datetime={hasValidDate ? show.date : undefined}>{dateLabel}</time>
+<article id={`show-${show.id}`} class="grid scroll-mt-28 gap-4 border-t border-fog/10 py-6 first:border-t-0 md:grid-cols-[0.24fr_1fr_auto] md:items-center">
+  <time class="text-xs font-bold uppercase tracking-[0.28em] text-muted" datetime={show.startDate}>{formatShowDate(show.startDate)}</time>
   <div>
     <h3 class="text-2xl font-black uppercase tracking-[-0.04em] text-fog">{show.title}</h3>
-    <p class="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-muted">{show.venue} · {show.city}</p>
+    <p class="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-muted">{location}</p>
+    {showStatus && <p class="mt-3 inline-flex rounded-full border border-fog/15 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-fog">{showStatus}</p>}
   </div>
-  {show.ticketUrl ? <a class="focus-ring rounded-full border border-fog/20 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-fog transition hover:border-fog hover:bg-fog/10" href={show.ticketUrl} target="_blank" rel="noreferrer">Tickets</a> : <span class="text-xs font-bold uppercase tracking-[0.22em] text-muted">{show.status}</span>}
+  {action ? (
+    <ButtonLink href={action.href} external>{action.label}</ButtonLink>
+  ) : status === 'scheduled' ? (
+    <span class="text-xs font-bold uppercase tracking-[0.22em] text-muted">Details to follow</span>
+  ) : null}
 </article>
