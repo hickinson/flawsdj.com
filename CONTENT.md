@@ -14,11 +14,33 @@ Edit `src/data/artistProfile.ts`:
 
 Use “Kai Hickinson” only where the biography needs the real name. The front-facing brand is `FLAWS`.
 
-## Editing social/contact links
+## Editing public destinations
 
-Edit `src/data/links.ts` for approved public links. Current approved links are Instagram, Resident Advisor and Facebook.
+Edit `src/data/links.ts` for approved public links.
+
+The data is grouped by purpose so that playlists, articles and booking pages do not appear automatically on every surface:
+
+- `socialLinks` drives the footer and general official-profile presentation.
+- `officialProfileLinks` drives `sameAs` structured data.
+- `musicDestinations` drives the SoundCloud players on the Music page.
+- `pressFeatures` drives approved editorial features.
+- `bookingLinks` and `contactLinks` drive the Contact page.
+- `epkLinks` drives the professional-links panel on the EPK page.
+
+Store canonical destinations without clipboard, referral or campaign tracking parameters. Do not change the destination meaning.
 
 Representation/contact details are in `src/data/artistProfile.ts`. The approved public email is `linda@parabelmusic.se` for Linda Nilsson / Parabel. Do not publish telephone numbers unless explicitly approved for public website use. Do not add a contact form or backend handling.
+
+## SoundCloud players
+
+The Music page uses approved click-to-load SoundCloud embeds:
+
+- `src/components/SoundCloudPlayers.astro` controls the section layout.
+- `src/components/SoundCloudEmbed.astro` builds the official player URL and loads the iframe only after the visitor chooses to do so.
+- Every player must retain an accessible external SoundCloud fallback link.
+- Do not enable autoplay.
+- Do not replace the click-to-load behaviour with automatically loaded third-party iframes without a new privacy and performance review.
+- Keep the `/privacy/` disclosure accurate whenever third-party services change.
 
 ## Adding releases
 
@@ -36,7 +58,7 @@ Current verified release records are `Motion` and a grouped FLOAT Records 2020 E
 Edit `src/data/releases.ts` and/or `src/data/videos.ts`:
 
 - Add approved mixes or live recordings only when real URLs are supplied.
-- Use external links rather than heavy embeds unless a future phase explicitly approves embeds.
+- Use lightweight external links unless a specific SoundCloud destination has been approved for the existing click-to-load embed pattern.
 - If thumbnails are supplied, place them in `public/images/releases/`, `public/images/press/` or another appropriate public image folder.
 
 ## Adding shows
@@ -47,6 +69,8 @@ Edit `src/data/shows.ts`:
 - Add verified archive notes only when date, venue and city details are approved.
 - This project does not scrape Resident Advisor and does not claim automatic sync.
 - Resident Advisor remains an external source link for users.
+
+The unified RA and non-RA event model is planned for the dedicated events-architecture phase. Do not invent event records while that collection remains empty.
 
 ## Adding press images and EPK assets
 
