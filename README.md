@@ -52,7 +52,7 @@ No Vercel configuration, server functions, SSR, Cloudflare Workers, CMS, databas
 Real content lives in local TypeScript data files:
 
 - Artist profile, biography, contact email and SEO defaults: `src/data/artistProfile.ts`
-- Approved social links: `src/data/links.ts`
+- Approved social, music, press and booking destinations: `src/data/links.ts`
 - Releases and generated music pages: `src/data/releases.ts`
 - Shows/events and supporting notes: `src/data/shows.ts`
 - Mix/live-set records: `src/data/videos.ts` and `src/data/releases.ts`
@@ -70,6 +70,15 @@ Approved public assets are stored under:
 
 Keep binary media in small, dedicated asset PRs. Do not combine large image or PDF additions with broad code/content changes.
 
+## SoundCloud players
+
+The Music page uses official SoundCloud embedded players for the approved profile and playlists. Players are click-to-load rather than loaded during the initial page request. This protects initial performance and gives visitors a clear choice before their browser connects to SoundCloud.
+
+- Player destinations are managed in `src/data/links.ts`.
+- Player presentation and loading behaviour are managed by `src/components/SoundCloudEmbed.astro` and `src/components/SoundCloudPlayers.astro`.
+- Keep the external SoundCloud fallback link for every player.
+- The privacy disclosure is published at `/privacy/`.
+
 ## Routes
 
 - `/`
@@ -79,26 +88,28 @@ Keep binary media in small, dedicated asset PRs. Do not combine large image or P
 - `/shows/`
 - `/epk/`
 - `/contact/`
+- `/privacy/`
 
 ## Launch content status
 
 Included:
 
 - Approved FLAWS biography facts.
-- Approved Instagram, Resident Advisor and Facebook links.
-- Approved representation email for Linda Nilsson / Parabel.
+- Approved SoundCloud, Instagram, Resident Advisor and Facebook profiles.
+- Embedded SoundCloud destinations for the main profile, releases/labels/collaborations and podcasts/interviews.
+- Approved Substack feature link.
+- Approved Parabel agency profile and representation email for Linda Nilsson / Parabel.
 - Verified release facts for `Motion` and the grouped FLOAT Records 2020 EPs.
 - Web-ready hero, portrait, press and live photography with safe missing-asset handling.
 - Direct EPK image downloads using approved local photography.
 - Production-ready black, white and square-avatar SVG brand assets.
+- Privacy disclosure and click-to-load handling for third-party SoundCloud players.
 
 Still missing until supplied, verified and approved for publication:
 
 - Individual FLOAT EP titles, artwork, track lists and external listen/buy links.
-- At least one approved public destination where visitors can hear FLAWS music.
-- Approved mixes or live recordings.
 - Confirmed upcoming event cards and verified archive details.
-- Press quotes and publication references.
+- Press quotes and publication references beyond the approved feature link.
 - Downloadable EPK PDFs, ZIP packs, technical riders or hospitality riders.
 - Production Cloudflare Pages deployment and final domain/DNS validation.
 
