@@ -1,14 +1,14 @@
 ---
 import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
-import { primaryLinks } from '@data/links';
+import { socialLinks } from '@data/links';
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
     <SectionHeading eyebrow="Links" title="Official channels" copy="Follow FLAWS through the official profiles below." />
-    <div class="grid gap-4 md:grid-cols-3">
-      {primaryLinks.map((link) => <ButtonLink href={link.href} external>{link.label}</ButtonLink>)}
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {socialLinks.map((link) => <ButtonLink href={link.href} external>{link.label}</ButtonLink>)}
     </div>
   </div>
 </section>

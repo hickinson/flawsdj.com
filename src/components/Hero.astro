@@ -1,6 +1,7 @@
 ---
 import ButtonLink from './ButtonLink.astro';
 import { artistProfile } from '@data/artistProfile';
+import { soundCloudProfileLink } from '@data/links';
 import { publicAssetExists } from '@utils/assets';
 
 const hasHeroImage = publicAssetExists(artistProfile.heroImage);
@@ -15,7 +16,7 @@ const hasHeroImage = publicAssetExists(artistProfile.heroImage);
       <p class="mt-8 text-lg font-semibold uppercase tracking-[0.3em] text-fog">{artistProfile.artistType}</p>
       <p class="mt-5 max-w-xl text-lg leading-8 text-muted">{artistProfile.tagline}</p>
       <div class="mt-10 flex flex-wrap gap-3" aria-label="Primary actions">
-        <ButtonLink href="/music/" variant="primary">Music</ButtonLink>
+        <ButtonLink href={soundCloudProfileLink.href} variant="primary" external>Listen on SoundCloud</ButtonLink>
         <ButtonLink href="/shows/">Gigs</ButtonLink>
         <ButtonLink href="/epk/">EPK</ButtonLink>
         <ButtonLink href="/contact/">Booking</ButtonLink>

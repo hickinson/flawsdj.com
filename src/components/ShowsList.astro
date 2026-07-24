@@ -2,10 +2,8 @@
 import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
 import ShowCard from './ShowCard.astro';
-import { primaryLinks } from '@data/links';
+import { residentAdvisorLink } from '@data/links';
 import { pastShowNotes, showArchiveNote, shows, showsDataNote } from '@data/shows';
-
-const raLink = primaryLinks.find((link) => link.label === 'Resident Advisor');
 ---
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
@@ -27,7 +25,7 @@ const raLink = primaryLinks.find((link) => link.label === 'Resident Advisor');
       <aside class="rounded-[2rem] border border-fog/10 bg-panel/35 p-6">
         <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Latest announcements</p>
         <p class="mt-5 text-sm leading-7 text-muted">{showsDataNote}</p>
-        {raLink && <ButtonLink href={raLink.href} external class="mt-6">Resident Advisor</ButtonLink>}
+        <ButtonLink href={residentAdvisorLink.href} external class="mt-6">Resident Advisor</ButtonLink>
       </aside>
     </div>
   </div>

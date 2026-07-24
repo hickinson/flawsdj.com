@@ -2,7 +2,7 @@
 import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
 import { artistProfile } from '@data/artistProfile';
-import { primaryLinks } from '@data/links';
+import { bookingLinks, contactLinks } from '@data/links';
 ---
 
 <section class="px-4 py-20 sm:px-6 lg:px-8">
@@ -13,9 +13,12 @@ import { primaryLinks } from '@data/links';
       <p class="mt-4 text-2xl font-black uppercase tracking-[-0.04em] text-fog">{artistProfile.representation}</p>
       <a class="focus-ring mt-4 inline-flex rounded-full text-sm font-bold text-muted underline-offset-4 transition hover:text-fog hover:underline" href={`mailto:${artistProfile.bookingEmail}`}>{artistProfile.bookingEmail}</a>
       <p class="mt-4 text-sm leading-7 text-muted">Booking, press and general enquiries.</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        {bookingLinks.map((link) => <ButtonLink href={link.href} external>{link.label}</ButtonLink>)}
+      </div>
     </div>
     <div class="mt-8 flex flex-wrap gap-3">
-      {primaryLinks.map((link) => <ButtonLink href={link.href} external>{link.label}</ButtonLink>)}
+      {contactLinks.map((link) => <ButtonLink href={link.href} external>{link.label}</ButtonLink>)}
     </div>
   </div>
 </section>

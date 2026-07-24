@@ -6,6 +6,14 @@ export type LinkItem = {
   isPlaceholder?: boolean;
 };
 
+export type SoundCloudDestination = {
+  label: string;
+  href: string;
+  description: string;
+  playerTitle: string;
+  kind: 'profile' | 'playlist';
+};
+
 export type Release = {
   slug: string;
   title: string;
