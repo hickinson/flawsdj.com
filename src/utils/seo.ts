@@ -7,9 +7,10 @@ export type SeoProps = {
   image?: string;
   pathname?: string;
   type?: 'website' | 'article' | 'profile';
+  noindex?: boolean;
 };
 
-export function buildSeo({ title, description, image, pathname = '/', type = 'website' }: SeoProps = {}) {
+export function buildSeo({ title, description, image, pathname = '/', type = 'website', noindex = false }: SeoProps = {}) {
   const siteTitle = title ? `${title} | ${artistProfile.name}` : artistProfile.seo.defaultTitle;
   const siteDescription = description ?? artistProfile.seo.defaultDescription;
   const canonicalPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
@@ -27,5 +28,6 @@ export function buildSeo({ title, description, image, pathname = '/', type = 'we
     canonicalUrl,
     imageUrl,
     type,
+    robots: noindex ? 'noindex, nofollow' : 'index, follow',
   };
 }

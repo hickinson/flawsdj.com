@@ -1,0 +1,28 @@
+---
+import ButtonLink from '@components/ButtonLink.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The requested page could not be found on the official FLAWS website."
+  pathname="/404/"
+  noindex
+>
+  <section class="px-4 py-24 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-7 sm:p-12">
+      <p class="text-xs font-bold uppercase tracking-[0.35em] text-muted">404</p>
+      <h1 class="mt-5 max-w-4xl text-5xl font-black uppercase leading-none tracking-[-0.06em] text-fog sm:text-7xl">
+        Page not found
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-muted">
+        The page may have moved, or the address may be incorrect. Continue to the main FLAWS website or explore the current music and gigs pages.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
+        <ButtonLink href="/" variant="primary">Home</ButtonLink>
+        <ButtonLink href="/music/">Music</ButtonLink>
+        <ButtonLink href="/shows/">Gigs</ButtonLink>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
