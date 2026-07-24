@@ -72,7 +72,7 @@ Keep binary media in small, dedicated asset PRs. Do not combine large image or P
 
 ## SoundCloud players
 
-The Music page uses official SoundCloud embedded players for the approved profile and playlists. Players are click-to-load rather than loaded during the initial page request. This protects initial performance and gives visitors a clear choice before their browser connects to SoundCloud.
+The Music page uses official SoundCloud embedded players for the approved releases/collaborations and podcasts/interviews playlists. The main profile remains available through the homepage listening action and official-profile links. Players are click-to-load rather than loaded during the initial page request. This protects initial performance and gives visitors a clear choice before their browser connects to SoundCloud.
 
 - Player destinations are managed in `src/data/links.ts`.
 - Player presentation and loading behaviour are managed by `src/components/SoundCloudEmbed.astro` and `src/components/SoundCloudPlayers.astro`.
@@ -96,10 +96,10 @@ Included:
 
 - Approved FLAWS biography facts.
 - Approved SoundCloud, Instagram, Resident Advisor and Facebook profiles.
-- Embedded SoundCloud destinations for the main profile, releases/labels/collaborations and podcasts/interviews.
+- Embedded SoundCloud destinations for releases/labels/collaborations and podcasts/interviews.
 - Approved Substack feature link.
 - Approved Parabel agency profile and representation email for Linda Nilsson / Parabel.
-- Verified release facts for `Motion` and the grouped FLOAT Records 2020 EPs.
+- Verified release facts and approved cover artwork for `Motion` and the grouped FLOAT Records 2020 EPs.
 - Web-ready hero, portrait, press and live photography with safe missing-asset handling.
 - Direct EPK image downloads using approved local photography.
 - Production-ready black, white and square-avatar SVG brand assets.
@@ -107,7 +107,7 @@ Included:
 
 Still missing until supplied, verified and approved for publication:
 
-- Individual FLOAT EP titles, artwork, track lists and external listen/buy links.
+- Individual FLOAT EP titles, track lists and external listen/buy links.
 - Confirmed upcoming event cards and verified archive details.
 - Press quotes and publication references beyond the approved feature link.
 - Downloadable EPK PDFs, ZIP packs, technical riders or hospitality riders.
