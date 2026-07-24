@@ -7,12 +7,18 @@ import '@styles/global.css';
 import { publicAssetExists } from '@utils/assets';
 import { buildSeo, type SeoProps } from '@utils/seo';
 
-type Props = SeoProps;
+type StructuredData = Record<string, unknown>;
+
+type Props = SeoProps & {
+  structuredData?: StructuredData | StructuredData[];
+};
+
+const { structuredData: pageStructuredData } = Astro.props;
 const seo = buildSeo(Astro.props);
 const heroImageUrl = publicAssetExists(artistProfile.heroImage)
   ? new URL(artistProfile.heroImage, artistProfile.siteUrl).toString()
   : undefined;
-const structuredData = {
+const artistStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'MusicGroup',
   name: artistProfile.name,
@@ -23,6 +29,14 @@ const structuredData = {
   ...(heroImageUrl ? { image: heroImageUrl } : {}),
   email: artistProfile.bookingEmail,
 };
+const structuredDataEntries = [
+  artistStructuredData,
+  ...(Array.isArray(pageStructuredData)
+    ? pageStructuredData
+    : pageStructuredData
+      ? [pageStructuredData]
+      : []),
+];
 ---
 
 <!doctype html>
@@ -44,7 +58,9 @@ const structuredData = {
     <meta property="og:url" content={seo.canonicalUrl} />
     {seo.imageUrl && <meta property="og:image" content={seo.imageUrl} />}
     <meta name="twitter:card" content={seo.imageUrl ? 'summary_large_image' : 'summary'} />
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    {structuredDataEntries.map((entry) => (
+      <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+    ))}
   </head>
   <body>
     <a class="focus-ring sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-fog focus:px-4 focus:py-3 focus:text-sm focus:font-bold focus:uppercase focus:tracking-[0.2em] focus:text-ink" href="#main-content">Skip to content</a>
