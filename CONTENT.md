@@ -67,14 +67,40 @@ Edit `src/data/releases.ts` and/or `src/data/videos.ts`:
 
 ## Adding shows
 
-Edit `src/data/shows.ts`:
+Edit the single `shows` collection in `src/data/shows.ts`. Use the shared `Show` type in `src/data/types.ts`.
 
-- Add confirmed future events to `shows`.
-- Add verified archive notes only when date, venue and city details are approved.
+Required fields:
+
+- `id`: a stable, URL-safe identifier.
+- `startDate`: a valid date in `YYYY-MM-DD` format.
+- `title`: the published event or billing title.
+- `city`: the confirmed city.
+- `venue`: the confirmed venue.
+
+Optional fields:
+
+- `endDate`: the final date of a multi-day event, also in `YYYY-MM-DD` format.
+- `country`: the published country name or code.
+- `status`: `scheduled`, `sold-out`, `cancelled` or `postponed`.
+- `ticketUrl`: the official ticket destination.
+- `eventUrl`: an official event or promoter destination.
+- `raUrl`: the direct Resident Advisor event URL.
+- `source`: `resident-advisor`, `official`, `promoter` or `manual`; this is internal metadata and is not rendered.
+
+Handling rules:
+
+- Add only confirmed and approved event records.
+- Use the same schema for RA and non-RA events.
+- Do not add `isPast`; upcoming and past events are derived automatically from the date.
+- Do not put `TBC` or free text into `startDate`; wait for a confirmed date before publishing the record.
+- Use `raUrl` only for a direct RA event page, not the general artist profile.
+- Prefer `ticketUrl` for ticketing and `eventUrl` for non-ticket event information.
+- The shared card prioritises Tickets, then Event details, then Resident Advisor.
+- Cancelled, postponed and sold-out statuses remain visible and suppress misleading ticket actions.
+- Upcoming records generate `MusicEvent` JSON-LD from the same local data.
 - This project does not scrape Resident Advisor and does not claim automatic sync.
-- Resident Advisor remains an external source link for users.
 
-The unified RA and non-RA event model is planned for the dedicated events-architecture phase. Do not invent event records while that collection remains empty.
+The static build validates date values. An invalid date should fail the build rather than publish broken `<time>` or structured-data output.
 
 ## Adding press images and EPK assets
 
