@@ -13,6 +13,7 @@
 - `src/layouts/BaseLayout.astro` contains shared document structure and SEO metadata output.
 - `src/components/` contains reusable presentation components.
 - `src/data/` contains approved local content, intentionally empty collections and media metadata for the artist profile, links, releases, shows, videos, press and EPK assets.
+- `src/utils/shows.ts` validates, sorts and maps event data to structured data.
 - `src/styles/global.css` contains Tailwind import, theme tokens and global atmosphere styles.
 - `public/` contains static files such as `robots.txt`, `_headers` and approved web-ready image/download assets.
 
@@ -39,6 +40,9 @@
 - Do not publish telephone numbers unless explicitly approved.
 - Keep binary images and PDFs in small, dedicated asset PRs rather than mixing them into broad code/content PRs.
 - Verify that local image paths exist before emitting image elements, Open Graph metadata or structured-data image URLs.
+- Keep all confirmed RA and non-RA events in the single `shows` collection.
+- Never scrape Resident Advisor or call undocumented event endpoints.
+- Use valid `YYYY-MM-DD` dates and direct approved URLs; do not store `TBC` as a date or maintain a manual `isPast` flag.
 
 ## Do-not-overengineer rules
 
