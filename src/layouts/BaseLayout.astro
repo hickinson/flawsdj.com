@@ -2,7 +2,7 @@
 import SiteFooter from '@components/SiteFooter.astro';
 import SiteHeader from '@components/SiteHeader.astro';
 import { artistProfile } from '@data/artistProfile';
-import { socialLinks } from '@data/links';
+import { officialProfileLinks } from '@data/links';
 import '@styles/global.css';
 import { publicAssetExists } from '@utils/assets';
 import { buildSeo, type SeoProps } from '@utils/seo';
@@ -19,7 +19,7 @@ const structuredData = {
   alternateName: 'FLAWS DJ',
   url: artistProfile.siteUrl,
   genre: artistProfile.genres,
-  sameAs: socialLinks.map((link) => link.href),
+  sameAs: officialProfileLinks.map((link) => link.href),
   ...(heroImageUrl ? { image: heroImageUrl } : {}),
   email: artistProfile.bookingEmail,
 };
