@@ -46,7 +46,7 @@ export const pressFeatures: LinkItem[] = [
   {
     label: 'The Beauty of Imperfection: FLAWS',
     href: 'https://open.substack.com/pub/alessandradc/p/the-beauty-of-imperfection-flaws',
-    note: 'Feature article by Alessandra Constantinescu on Substack.',
+    note: 'Feature article published on Substack.',
   },
 ];
 
