@@ -9,7 +9,7 @@ import { featuredRelease } from '@data/releases';
   <div class="mx-auto max-w-7xl">
     <SectionHeading eyebrow="Featured release" title="Selected music" />
     <div class="grid gap-8 rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-5 md:grid-cols-[0.82fr_1.18fr] md:p-8">
-      <ReleaseArtwork release={featuredRelease} priority />
+      <ReleaseArtwork release={featuredRelease} />
       <div class="self-end">
         <p class="text-xs font-bold uppercase tracking-[0.35em] text-muted">{featuredRelease.type} · {featuredRelease.status}</p>
         <h3 class="mt-4 text-4xl font-black uppercase tracking-[-0.05em] text-fog sm:text-6xl">{featuredRelease.title}</h3>
