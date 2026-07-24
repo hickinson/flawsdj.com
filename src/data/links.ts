@@ -65,7 +65,7 @@ export const musicDestinations: SoundCloudDestination[] = [
   {
     label: 'Listen to FLAWS',
     href: soundCloudProfileLink.href,
-    description: 'The main FLAWS SoundCloud profile, bringing together current uploads and artist activity.',
+    description: 'The official FLAWS SoundCloud profile.',
     playerTitle: 'FLAWS SoundCloud profile player',
     kind: 'profile',
   },
