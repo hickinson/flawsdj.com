@@ -31,4 +31,4 @@ export const mixes: Release[] = [];
 
 export const mixesEmptyState = 'Mixes and live recordings will be published here when available.';
 
-export const latestRelease = releases[0];
+export const featuredRelease = releases[0];
