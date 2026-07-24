@@ -44,5 +44,6 @@
 
 - Do not add a CMS, database, authentication or admin system.
 - Prefer local TypeScript data files over extra tooling.
-- Prefer external music/video links over heavy embeds on initial page load.
+- SoundCloud embeds are approved only through the privacy-aware click-to-load components; do not add automatically loaded third-party players.
+- Keep an accessible external SoundCloud fallback link for every embedded player.
 - Keep components small, readable and static-friendly.
