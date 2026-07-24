@@ -57,6 +57,8 @@ export const socialLinks: LinkItem[] = [
   facebookLink,
 ];
 
+export const contactLinks: LinkItem[] = [instagramLink, residentAdvisorLink, facebookLink];
+
 export const officialProfileLinks: LinkItem[] = [...socialLinks, parabelProfileLink];
 
 export const musicDestinations: SoundCloudDestination[] = [
