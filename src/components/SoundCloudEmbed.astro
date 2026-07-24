@@ -1,0 +1,96 @@
+---
+import ButtonLink from './ButtonLink.astro';
+import type { SoundCloudDestination } from '@data/types';
+
+type Props = {
+  destination: SoundCloudDestination;
+};
+
+const { destination } = Astro.props;
+const playerUrl = new URL('https://w.soundcloud.com/player/');
+playerUrl.search = new URLSearchParams({
+  url: destination.href,
+  color: '#f5f5f5',
+  auto_play: 'false',
+  hide_related: 'true',
+  show_comments: 'false',
+  show_user: 'true',
+  show_reposts: 'false',
+  show_teaser: 'false',
+  visual: 'false',
+}).toString();
+const playerHeight = 450;
+---
+
+<article
+  class="overflow-hidden rounded-[2rem] border border-fog/10 bg-fog/[0.03]"
+  data-soundcloud-embed
+  data-player-url={playerUrl.toString()}
+  data-player-title={destination.playerTitle}
+  data-player-height={String(playerHeight)}
+>
+  <div class="min-h-72" data-player-shell>
+    <div class="flex min-h-72 flex-col justify-between p-6 sm:p-8" data-player-placeholder>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">SoundCloud player</p>
+        <h3 class="mt-4 text-3xl font-black uppercase tracking-[-0.04em] text-fog sm:text-4xl">{destination.label}</h3>
+        <p class="mt-4 max-w-2xl text-sm leading-7 text-muted">{destination.description}</p>
+      </div>
+      <div class="mt-8">
+        <button
+          class="focus-ring inline-flex items-center justify-center rounded-full border border-fog bg-fog px-5 py-3 text-xs font-bold uppercase tracking-[0.24em] text-ink transition hover:bg-transparent hover:text-fog disabled:cursor-wait disabled:opacity-60"
+          type="button"
+          data-load-soundcloud
+        >
+          Load SoundCloud player
+        </button>
+        <p class="mt-4 max-w-2xl text-xs leading-5 text-muted">
+          Loading connects your browser to SoundCloud, which may collect usage data and use cookies. Read the <a class="focus-ring rounded-sm underline underline-offset-4 hover:text-fog" href="/privacy/">privacy notice</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center justify-between gap-4 border-t border-fog/10 px-6 py-5 sm:px-8">
+    <p class="text-xs uppercase tracking-[0.22em] text-muted">{destination.kind === 'profile' ? 'Official profile' : 'Official playlist'}</p>
+    <ButtonLink href={destination.href} external>Open on SoundCloud</ButtonLink>
+  </div>
+</article>
+
+<script>
+  const initialiseSoundCloudEmbeds = () => {
+    document.querySelectorAll<HTMLElement>('[data-soundcloud-embed]').forEach((container) => {
+      if (container.dataset.playerInitialised === 'true') return;
+
+      const button = container.querySelector<HTMLButtonElement>('[data-load-soundcloud]');
+      const shell = container.querySelector<HTMLElement>('[data-player-shell]');
+      const playerUrl = container.dataset.playerUrl;
+      const playerTitle = container.dataset.playerTitle;
+      const playerHeight = container.dataset.playerHeight;
+
+      if (!button || !shell || !playerUrl || !playerTitle || !playerHeight) return;
+
+      container.dataset.playerInitialised = 'true';
+      button.addEventListener('click', () => {
+        button.disabled = true;
+        button.textContent = 'Loading player…';
+
+        const iframe = document.createElement('iframe');
+        iframe.src = playerUrl;
+        iframe.title = playerTitle;
+        iframe.width = '100%';
+        iframe.height = playerHeight;
+        iframe.allow = 'autoplay';
+        iframe.setAttribute('scrolling', 'no');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        iframe.className = 'block w-full bg-white';
+
+        shell.replaceChildren(iframe);
+        iframe.addEventListener('load', () => iframe.focus(), { once: true });
+      });
+    });
+  };
+
+  initialiseSoundCloudEmbeds();
+  document.addEventListener('astro:page-load', initialiseSoundCloudEmbeds);
+</script>
