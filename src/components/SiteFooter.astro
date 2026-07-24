@@ -11,9 +11,14 @@ import { socialLinks } from '@data/links';
     </div>
     <div class="flex flex-wrap gap-4 md:justify-end">
       {socialLinks.map((link) => (
-        <a class="focus-ring rounded-full text-xs font-bold uppercase tracking-[0.22em] text-muted transition hover:text-fog" href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+        <a class="focus-ring rounded-full text-xs font-bold uppercase tracking-[0.22em] text-muted transition hover:text-fog" href={link.href} target="_blank" rel="noopener noreferrer">
+          {link.label} <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span>
+        </a>
       ))}
     </div>
-    <p class="text-xs uppercase tracking-[0.24em] text-muted/70 md:col-span-2">© {new Date().getFullYear()} {artistProfile.name}. All rights reserved.</p>
+    <div class="flex flex-wrap items-center justify-between gap-4 md:col-span-2">
+      <p class="text-xs uppercase tracking-[0.24em] text-muted/70">© {new Date().getFullYear()} {artistProfile.name}. All rights reserved.</p>
+      <a class="focus-ring rounded-sm text-xs font-bold uppercase tracking-[0.22em] text-muted transition hover:text-fog" href="/privacy/">Privacy</a>
+    </div>
   </div>
 </footer>
