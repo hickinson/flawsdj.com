@@ -35,17 +35,22 @@ Preview a production build locally with:
 npm run preview
 ```
 
+A GitHub Actions workflow also runs `npm ci` and `npm run build` for pull requests and pushes to `main`.
+
 ## Cloudflare Pages deployment
 
 Use the standard Cloudflare Pages static-site settings:
 
 - **Framework preset:** Astro
+- **Production branch:** `main`
 - **Build command:** `npm run build`
 - **Build output directory:** `dist`
 - **Root directory:** repository root
-- **Node.js version:** `22` or newer
+- **Node.js version:** `22`, pinned by `.node-version`
 
 No Vercel configuration, server functions, SSR, Cloudflare Workers, CMS, database or authentication are required for this version.
+
+Follow the production domain, DNS and verification steps in [`LAUNCH.md`](./LAUNCH.md).
 
 ## Content editing guidance
 
@@ -101,6 +106,7 @@ All confirmed dates live in the single typed `shows` collection in `src/data/sho
 - `/epk/`
 - `/contact/`
 - `/privacy/`
+- custom `404.html` output from `src/pages/404.astro`
 
 ## Launch content status
 
@@ -117,11 +123,13 @@ Included:
 - Production-ready black, white and square-avatar SVG brand assets.
 - Privacy disclosure and click-to-load handling for third-party SoundCloud players.
 - Unified RA and non-RA event architecture with automatic sorting and structured data.
+- Five verified Resident Advisor archive dates.
+- Branded noindex 404 page and automated production-build validation.
 
 Still missing until supplied, verified and approved for publication:
 
 - Individual FLOAT EP titles, track lists and external listen/buy links.
-- Confirmed upcoming event records and verified archive details.
+- Confirmed upcoming event records.
 - Press quotes and publication references beyond the approved feature link.
 - Downloadable EPK PDFs, ZIP packs, technical riders or hospitality riders.
 - Production Cloudflare Pages deployment and final domain/DNS validation.
