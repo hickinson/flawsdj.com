@@ -22,7 +22,7 @@ The data is grouped by purpose so that playlists, articles and booking pages do 
 
 - `socialLinks` drives the footer and general official-profile presentation.
 - `officialProfileLinks` drives `sameAs` structured data.
-- `musicDestinations` drives the SoundCloud players on the Music page.
+- `musicDestinations` drives the SoundCloud playlist players on the Music page.
 - `pressFeatures` drives approved editorial features.
 - `bookingLinks` and `contactLinks` drive the Contact page.
 - `epkLinks` drives the professional-links panel on the EPK page.
@@ -33,10 +33,11 @@ Representation/contact details are in `src/data/artistProfile.ts`. The approved 
 
 ## SoundCloud players
 
-The Music page uses approved click-to-load SoundCloud embeds:
+The Music page uses approved click-to-load SoundCloud playlist embeds:
 
 - `src/components/SoundCloudPlayers.astro` controls the section layout.
 - `src/components/SoundCloudEmbed.astro` builds the official player URL and loads the iframe only after the visitor chooses to do so.
+- The main FLAWS profile remains available through the homepage listening action and official-profile links rather than a third embedded block.
 - Every player must retain an accessible external SoundCloud fallback link.
 - Do not enable autoplay.
 - Do not replace the click-to-load behaviour with automatically loaded third-party iframes without a new privacy and performance review.
@@ -48,7 +49,10 @@ Edit `src/data/releases.ts`:
 
 - Add verified releases to `releases`.
 - Include only confirmed title, year, label, status, summary, links and track list.
-- Put approved release artwork in `public/images/releases/` and reference it with a root-relative path such as `/images/releases/example.jpg`.
+- Put approved release artwork in `public/images/releases/`.
+- Use `artwork` and `artworkAlt` for a single cover image.
+- Use `artworks` for an approved multi-cover collection; the shared `ReleaseArtwork.astro` component will present it as a collage.
+- Use exact case-sensitive root-relative paths such as `/images/releases/Motion1.jpg`.
 - Release detail pages are generated from `src/pages/music/[slug].astro`.
 
 Current verified release records are `Motion` and a grouped FLOAT Records 2020 EPs entry. Add individual FLOAT EP details only when verified.

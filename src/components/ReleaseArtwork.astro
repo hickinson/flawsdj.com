@@ -1,0 +1,56 @@
+---
+import type { Release } from '@data/types';
+import { publicAssetExists } from '@utils/assets';
+
+type Props = {
+  release: Release;
+  class?: string;
+  priority?: boolean;
+};
+
+const {
+  release,
+  class: className = '',
+  priority = false,
+} = Astro.props;
+
+const singleArtwork = release.artwork && publicAssetExists(release.artwork)
+  ? {
+      src: release.artwork,
+      alt: release.artworkAlt ?? `Cover artwork for ${release.title} by FLAWS.`,
+    }
+  : undefined;
+
+const artworkCollection = (release.artworks ?? []).filter((artwork) => publicAssetExists(artwork.src));
+const displayedArtwork = singleArtwork ?? artworkCollection[0];
+const useCollage = artworkCollection.length > 1;
+---
+
+<div class={`relative aspect-square overflow-hidden rounded-[1.5rem] border border-fog/10 bg-panel/60 ${className}`}>
+  {useCollage ? (
+    <div class="grid h-full grid-cols-3" role="group" aria-label={`Artwork collection for ${release.title}`}>
+      {artworkCollection.map((artwork, index) => (
+        <img
+          class={`h-full w-full object-cover ${index > 0 ? 'border-l border-black/40' : ''}`}
+          src={artwork.src}
+          alt={artwork.alt}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+      ))}
+    </div>
+  ) : displayedArtwork ? (
+    <img
+      class="h-full w-full object-cover"
+      src={displayedArtwork.src}
+      alt={displayedArtwork.alt}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  ) : (
+    <div class="flex h-full flex-col justify-between bg-[linear-gradient(140deg,rgba(245,245,245,0.1),rgba(24,24,24,0.82)_48%,rgba(0,0,0,0.96))] p-5">
+      <p class="text-xs font-bold uppercase tracking-[0.28em] text-muted">{release.label ?? release.type}</p>
+      <p class="text-xs uppercase tracking-[0.24em] text-muted">{release.status}</p>
+    </div>
+  )}
+</div>

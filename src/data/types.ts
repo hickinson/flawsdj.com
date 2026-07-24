@@ -14,6 +14,11 @@ export type SoundCloudDestination = {
   kind: 'profile' | 'playlist';
 };
 
+export type ReleaseArtwork = {
+  src: string;
+  alt: string;
+};
+
 export type Release = {
   slug: string;
   title: string;
@@ -23,6 +28,8 @@ export type Release = {
   label?: string;
   summary: string;
   artwork?: string;
+  artworkAlt?: string;
+  artworks?: ReleaseArtwork[];
   links: LinkItem[];
   tracks: string[];
   isPlaceholder?: boolean;
