@@ -80,13 +80,14 @@ const playerHeight = 450;
         iframe.width = '100%';
         iframe.height = playerHeight;
         iframe.allow = 'autoplay';
+        iframe.tabIndex = 0;
         iframe.setAttribute('scrolling', 'no');
         iframe.setAttribute('frameborder', '0');
         iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
         iframe.className = 'block w-full bg-white';
 
         shell.replaceChildren(iframe);
-        iframe.addEventListener('load', () => iframe.focus(), { once: true });
+        iframe.focus();
       });
     });
   };
