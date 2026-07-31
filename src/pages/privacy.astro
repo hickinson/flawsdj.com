@@ -13,7 +13,10 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         <div>
           <h2 class="text-xl font-black uppercase tracking-[-0.03em] text-fog">SoundCloud players</h2>
           <p class="mt-4">
-            The Music page offers embedded SoundCloud players. A player is not loaded until you choose its “Load SoundCloud player” button. Loading a player connects your browser to SoundCloud. SoundCloud may then collect usage data and use cookies or similar technologies under its own policies.
+            The Music page offers two embedded SoundCloud playlist players. On your first visit, SoundCloud remains disconnected until you choose “Enable SoundCloud playlists”. That choice loads both players and is stored in your browser’s local storage so they can load automatically on later visits. You can disable automatic loading from the Music page, which clears the saved choice and reloads the page.
+          </p>
+          <p class="mt-4">
+            Loading the players connects your browser to SoundCloud. SoundCloud may then collect usage data and use cookies or similar technologies under its own policies. The players are configured not to start audio automatically.
           </p>
           <ButtonLink class="mt-6" href="https://soundcloud.com/pages/cookies" external>SoundCloud cookie policy</ButtonLink>
         </div>
