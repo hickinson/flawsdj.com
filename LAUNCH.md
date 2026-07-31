@@ -4,34 +4,30 @@ This runbook covers the production deployment and verification of the static Ast
 
 ## Current launch position
 
-The repository is ready for a standard Git-integrated Cloudflare Pages deployment.
+The public GitHub repository `hickinson/flawsdj.com` is connected to the Cloudflare Pages project `flawsdjdotcom`. Production and pull-request preview deployments are working, and the initial `pages.dev` deployment has been reviewed successfully.
 
-At the start of the launch review on 24 July 2026, neither `flawsdj.com` nor `www.flawsdj.com` resolved publicly. Treat the custom-domain and DNS steps below as incomplete until both hostnames have been tested from a public network.
+The remaining launch work is the final release-assurance preview, custom apex domain, DNS, HTTPS and hostname redirects. Treat these steps as incomplete until the public hostnames have been tested from an external network.
 
-## 1. Connect the repository to Cloudflare Pages
+## 1. Confirm the connected Pages project
 
-In the Cloudflare dashboard:
+In the Cloudflare dashboard, open **Workers & Pages** and select `flawsdjdotcom`.
 
-1. Open **Workers & Pages**.
-2. Create or open the Pages project.
-3. Connect the private GitHub repository `hickinson/flawsdj.com`.
-4. Use these build settings:
+Confirm these settings:
 
-   - Production branch: `main`
-   - Framework preset: `Astro`
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-   - Root directory: leave blank / repository root
-   - Node.js: `22`, also pinned by `.node-version`
-
-5. Keep automatic production deployments enabled for `main`.
-6. Keep preview deployments enabled for pull-request branches.
+- Production branch: `main`
+- Framework preset: `Astro`
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Root directory: blank / repository root
+- Node.js: `22`, also pinned by `.node-version`
+- Automatic production deployments: enabled for `main`
+- Preview deployments: enabled for pull-request branches
 
 Do not add a Cloudflare adapter, Pages Functions, Workers or server-side rendering. This site builds to static files.
 
-## 2. Validate the first Pages deployment
+## 2. Validate the final Pages deployment
 
-Before attaching the custom domain, open the generated `*.pages.dev` production URL and check:
+Before attaching the custom domain, open the latest `flawsdjdotcom.pages.dev` production deployment and check:
 
 - `/`
 - `/music/`
@@ -47,11 +43,13 @@ Before attaching the custom domain, open the generated `*.pages.dev` production 
 Also confirm:
 
 - the mobile navigation opens and all links work;
-- the two SoundCloud players load only after activation and do not autoplay;
+- the two SoundCloud players load only after first-use activation, restore from a saved choice on later visits and do not autoplay;
 - all release, press and hero images load without layout errors;
 - Resident Advisor, SoundCloud, Substack and Parabel links reach the intended destinations;
 - direct EPK image downloads work;
-- keyboard focus remains visible throughout the site.
+- keyboard focus remains visible throughout the site;
+- no horizontal overflow appears at mobile, tablet or desktop widths;
+- the site remains usable at 200% browser zoom and with reduced motion enabled.
 
 ## 3. Attach the apex domain
 
@@ -65,21 +63,47 @@ In the Pages project:
 
 The site configuration, canonical URLs, sitemap and robots file already use `https://flawsdj.com` as the production origin.
 
-## 4. Handle the `www` hostname
+## 4. Redirect the `www` hostname
 
 Use `flawsdj.com` as the canonical hostname.
 
-Cloudflare Pages `_redirects` files do not support domain-level redirects. Configure the `www.flawsdj.com` to `https://flawsdj.com` redirect in Cloudflare using a Bulk Redirect or equivalent zone-level redirect rule, preserving the path and query string.
+Cloudflare Pages `_redirects` files do not support domain-level redirects. Configure an account-level Bulk Redirect with:
 
-Ensure `www` has the proxied DNS record required by the chosen Cloudflare redirect configuration.
+- Source: `www.flawsdj.com`
+- Target: `https://flawsdj.com`
+- Status: `301`
+- Preserve query string: enabled
+- Subpath matching: enabled
+- Preserve path suffix: enabled
 
-## 5. Production verification
+Create the proxied DNS record required for the redirect:
 
-After DNS activation, run:
+- Type: `A`
+- Name: `www`
+- IPv4 address: `192.0.2.1`
+- Proxy status: proxied
+
+## 5. Redirect the production `pages.dev` hostname
+
+After `flawsdj.com` is active, configure a Bulk Redirect from the generated production hostname to the canonical domain:
+
+- Source: `flawsdjdotcom.pages.dev`
+- Target: `https://flawsdj.com`
+- Status: `301`
+- Preserve query string: enabled
+- Subpath matching: enabled
+- Preserve path suffix: enabled
+
+Keep **Include subdomains** disabled if pull-request branch previews should remain directly accessible at their generated `*.flawsdjdotcom.pages.dev` addresses. Enable it only if all Pages preview hostnames should also redirect to production.
+
+## 6. Production verification
+
+After DNS and certificate activation, run:
 
 ```sh
 curl -I https://flawsdj.com/
 curl -I https://www.flawsdj.com/
+curl -I https://flawsdjdotcom.pages.dev/
 curl -I https://flawsdj.com/robots.txt
 curl -I https://flawsdj.com/sitemap-index.xml
 curl -I https://flawsdj.com/this-page-does-not-exist
@@ -89,6 +113,7 @@ Expected results:
 
 - `https://flawsdj.com/` returns `200` over HTTPS;
 - `https://www.flawsdj.com/...` redirects permanently to the matching apex path;
+- `https://flawsdjdotcom.pages.dev/...` redirects permanently to the matching apex path;
 - `robots.txt` and `sitemap-index.xml` return `200`;
 - an unknown route returns `404` and displays the branded not-found page;
 - security headers from `public/_headers` are present;
@@ -102,16 +127,18 @@ Inspect the rendered source on the homepage, release pages and shows page to con
 - upcoming events, when available, emit matching `MusicEvent` JSON-LD;
 - the 404 page includes `noindex, nofollow`.
 
-## 6. Final launch checks
+## 7. Final launch checks
 
 Complete one final pass on a real mobile device and a desktop browser:
 
 - navigation and focus behaviour;
-- text contrast and zoom at 200%;
+- heading hierarchy and text contrast;
+- text zoom at 200%;
 - image loading and cropping;
-- SoundCloud consent/loading behaviour;
+- SoundCloud consent, saved-choice and loading behaviour;
 - all booking and professional links;
+- EPK image viewing and downloads;
 - no private telephone number anywhere in the public site or downloads;
 - no unverified events, release claims or press quotations.
 
-Record the final production URL and launch date in the README after successful deployment.
+Record the final production URL and launch date in `README.md` after successful deployment.

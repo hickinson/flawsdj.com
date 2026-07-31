@@ -4,97 +4,74 @@ Last updated: 31 July 2026
 
 ## Current position
 
-The site has moved beyond initial construction and is now in stakeholder-led refinement and release assurance.
+The main construction and stakeholder-feedback phases are complete. The site is now in final release assurance and domain launch.
 
-Completed foundations include:
+Completed work includes:
 
 - static Astro architecture for Cloudflare Pages;
 - approved biography, representation and contact details;
 - approved photography, logo assets and release artwork;
-- EPK media presentation and downloads;
-- typed release and event data;
-- verified Resident Advisor archive dates;
+- EPK media presentation and image downloads;
+- typed release and unified event data;
+- five verified Resident Advisor archive dates;
 - metadata, structured data, sitemap, privacy page and branded 404 page;
 - automated production-build checks;
-- Kai's first content-decluttering feedback;
-- the accepted interactive, photography-led homepage direction.
+- Kai's content-decluttering feedback;
+- the accepted interactive, photography-led homepage;
+- one remembered SoundCloud choice that loads both playlists together without autoplay;
+- semantic page-heading hardening across the principal routes;
+- a connected Cloudflare Pages project and reviewed `pages.dev` deployment.
 
-## Current package — SoundCloud playlist experience
+## Current release package — launch copy and documentation alignment
 
-Status: **implemented for review**
+This package completes the remaining low-risk content and project-control work identified during release assurance.
 
-Stakeholder requirement:
+Implemented outcomes:
 
-> Reduce the friction created by separate “Load SoundCloud player” buttons on the Music page.
+- removes maintenance and approval-workflow wording from visitor-facing release, feature, EPK and contact copy;
+- removes empty track-list panels rather than publishing unavailable-data messages;
+- makes the homepage Gigs status match the current absence of announced future dates;
+- aligns `AGENTS.md` with the accepted first-visit and returning-visit SoundCloud behaviour;
+- updates this roadmap to reflect the launch phase;
+- updates `LAUNCH.md` for the connected public repository, active Pages project and final hostname redirects.
 
-Implemented outcome:
-
-- one page-level control enables both SoundCloud playlists together;
-- the visitor's choice is stored in browser local storage;
-- both players load automatically on later visits in the same browser;
-- the saved choice can be cleared from the Music page;
-- audio remains configured not to autoplay;
-- direct SoundCloud fallback links remain available;
-- privacy and repository documentation reflect the behaviour.
-
-Validation before merge:
+Validation for this package:
 
 - run `npm ci` and `npm run build`;
-- test the Music page on desktop and mobile;
-- confirm one activation loads both playlists;
-- refresh and confirm both playlists load automatically;
-- disable automatic loading and confirm the page returns to the disconnected state;
-- test normal, private-browsing and blocked-storage behaviour;
-- keyboard-test both controls and the embedded players;
-- verify no audio starts automatically;
-- review the Cloudflare Pages preview.
+- review the Cloudflare branch preview;
+- check the homepage, Music release cards and both release-detail pages;
+- check About, EPK and Contact copy;
+- confirm empty track-list sections are not rendered;
+- confirm no biography, release, event, link, SoundCloud or binary-asset data has changed.
 
-## Next phase — Post-feedback release assurance
+## Next phase — domain cutover and final launch verification
 
-The next controlled phase should verify the accepted site as a complete launch candidate rather than introduce another broad redesign.
+### Final Pages assurance
 
-### Functional assurance
+- Confirm the latest `main` build and Cloudflare production deployment succeed.
+- Complete a final mobile, tablet and desktop review.
+- Keyboard-test navigation, homepage interactions, SoundCloud controls and downloads.
+- Verify every internal route, external destination and EPK image download.
+- Verify titles, descriptions, canonical URLs, Open Graph images, structured data, sitemap, robots metadata and 404 handling.
 
-- Verify every internal route, homepage destination and external link.
-- Confirm SoundCloud players and direct fallbacks.
-- Confirm event ordering and Resident Advisor links.
-- Confirm EPK image viewing and downloads.
-- Confirm booking and representation links.
-- Confirm the custom 404 recovery routes.
+### Production domain
 
-### Responsive and interaction assurance
-
-- Review homepage, Music, About, Gigs, EPK and Contact on mobile, tablet and desktop.
-- Keyboard-test navigation, interactive homepage rows, controls and embedded players.
-- Verify visible focus states.
-- Verify touch alternatives where hover is unavailable.
-- Verify `prefers-reduced-motion` behaviour.
-- Check for unexpected layout movement and horizontal overflow.
-
-### Content and identity assurance
-
-- Confirm biography currency with Kai.
-- Confirm representation email and agency profile.
-- Confirm release summaries and artwork.
-- Confirm all published event records remain factual and current.
-- Review alt text and public-facing labels.
-
-### SEO and deployment assurance
-
-- Verify titles, descriptions, canonical URLs and Open Graph images.
-- Verify `MusicGroup` and `MusicEvent` structured data.
-- Verify sitemap, robots metadata and 404 `noindex` handling.
-- Complete the Cloudflare Pages and domain steps in `LAUNCH.md`.
-- Verify `flawsdj.com`, HTTPS and the `www` redirect after deployment.
+- Add `flawsdj.com` to the Pages project's custom domains.
+- Complete Cloudflare zone, nameserver, DNS and certificate activation where required.
+- Configure `www.flawsdj.com` to redirect permanently to the matching apex path.
+- Redirect the production `flawsdjdotcom.pages.dev` hostname to the matching apex path after the custom domain is active.
+- Verify HTTPS, canonical-domain output, redirects and public smoke tests.
+- Record the production URL and launch date in `README.md`.
 
 ## Later, only when justified
 
 - Extend the homepage interaction language to Music, Gigs or EPK where it improves discovery rather than adding decoration.
 - Add confirmed upcoming shows through the existing unified event model.
 - Add verified release titles, track lists and listen/buy links.
-- Add press quotations only when the source and wording are approved.
+- Add press quotations only when their source and wording are approved.
 - Add downloadable EPK PDFs, riders or ZIP packs only when supplied and approved.
 - Process new binary media in small asset-only pull requests.
+- Consider an event-date rebuild reminder or scheduled deployment once upcoming shows are published.
 
 ## Out of scope for launch v1
 
