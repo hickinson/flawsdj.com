@@ -5,8 +5,9 @@ import { publicAssetExists } from '@utils/assets';
 
 type Props = {
   variant?: 'short' | 'long';
+  headingLevel?: 1 | 2;
 };
-const { variant = 'short' } = Astro.props;
+const { variant = 'short', headingLevel = 2 } = Astro.props;
 const shortParagraphs = artistProfile.shortBio.split('\n\n');
 const hasPortraitImage = publicAssetExists(artistProfile.portraitImage);
 ---
@@ -27,7 +28,7 @@ const hasPortraitImage = publicAssetExists(artistProfile.portraitImage);
       )}
     </figure>
     <div class="self-center">
-      <SectionHeading eyebrow="Biography" title="Kai Hickinson / FLAWS" />
+      <SectionHeading eyebrow="Biography" title="Kai Hickinson / FLAWS" headingLevel={headingLevel} />
       <div class="space-y-6 text-base leading-8 text-muted sm:text-lg">
         {(variant === 'long' ? artistProfile.longBio : shortParagraphs).map((paragraph) => <p>{paragraph}</p>)}
       </div>
