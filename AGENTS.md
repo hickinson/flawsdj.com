@@ -48,6 +48,7 @@
 
 - Do not add a CMS, database, authentication or admin system.
 - Prefer local TypeScript data files over extra tooling.
-- SoundCloud embeds are approved only through the privacy-aware click-to-load components; do not add automatically loaded third-party players.
+- Use the privacy-aware shared SoundCloud activation components. On a visitor's first Music-page visit, do not load SoundCloud iframes until they enable the playlists. A previously saved local-storage choice may restore both players automatically on later visits.
+- Never configure SoundCloud audio to autoplay.
 - Keep an accessible external SoundCloud fallback link for every embedded player.
 - Keep components small, readable and static-friendly.
