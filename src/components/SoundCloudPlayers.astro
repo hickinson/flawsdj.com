@@ -11,8 +11,147 @@ import { musicDestinations } from '@data/links';
       title="SoundCloud playlists"
       copy="Explore selected releases, labels and collaborations, plus podcast and interview appearances."
     />
+
+    <div class="mb-6 rounded-[2rem] border border-fog/10 bg-fog/[0.04] p-6 sm:p-8" data-soundcloud-consent>
+      <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">SoundCloud</p>
+          <h3 class="mt-4 text-3xl font-black uppercase tracking-[-0.04em] text-fog sm:text-4xl">Load both playlists</h3>
+          <p class="mt-4 max-w-3xl text-sm leading-7 text-muted">
+            Enable SoundCloud once to load both playlist players. Your choice is remembered in this browser so the players load automatically on later visits. Audio never starts automatically. Read the <a class="focus-ring rounded-sm underline underline-offset-4 hover:text-fog" href="/privacy/">privacy notice</a>.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <button
+            class="focus-ring inline-flex items-center justify-center rounded-full border border-fog bg-fog px-5 py-3 text-xs font-bold uppercase tracking-[0.24em] text-ink transition hover:bg-transparent hover:text-fog"
+            type="button"
+            data-enable-soundcloud
+          >
+            Enable SoundCloud playlists
+          </button>
+          <button
+            class="focus-ring inline-flex items-center justify-center rounded-full border border-fog/30 px-5 py-3 text-xs font-bold uppercase tracking-[0.24em] text-fog transition hover:border-fog hover:bg-fog hover:text-ink"
+            type="button"
+            data-disable-soundcloud
+            hidden
+          >
+            Disable automatic loading
+          </button>
+        </div>
+      </div>
+      <p class="mt-5 text-xs leading-5 text-muted" data-soundcloud-status aria-live="polite">
+        SoundCloud remains disconnected until you enable both playlists.
+      </p>
+    </div>
+
     <div class="grid gap-5 lg:grid-cols-2">
       {musicDestinations.map((destination) => <SoundCloudEmbed destination={destination} />)}
     </div>
   </div>
 </section>
+
+<script>
+  const soundCloudPreferenceKey = 'flaws:soundcloud-playlists-enabled';
+
+  const createSoundCloudPlayer = (container: HTMLElement) => {
+    if (container.dataset.playerInitialised === 'true') return;
+
+    const shell = container.querySelector<HTMLElement>('[data-player-shell]');
+    const playerUrl = container.dataset.playerUrl;
+    const playerTitle = container.dataset.playerTitle;
+    const playerHeight = container.dataset.playerHeight;
+
+    if (!shell || !playerUrl || !playerTitle || !playerHeight) return;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = playerUrl;
+    iframe.title = playerTitle;
+    iframe.width = '100%';
+    iframe.height = playerHeight;
+    iframe.allow = 'autoplay';
+    iframe.tabIndex = 0;
+    iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    iframe.className = 'block w-full bg-white';
+
+    shell.replaceChildren(iframe);
+    container.dataset.playerInitialised = 'true';
+  };
+
+  const loadAllSoundCloudPlayers = () => {
+    document.querySelectorAll<HTMLElement>('[data-soundcloud-embed]').forEach(createSoundCloudPlayer);
+  };
+
+  const readSoundCloudPreference = () => {
+    try {
+      return window.localStorage.getItem(soundCloudPreferenceKey) === 'true';
+    } catch {
+      return false;
+    }
+  };
+
+  const saveSoundCloudPreference = () => {
+    try {
+      window.localStorage.setItem(soundCloudPreferenceKey, 'true');
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const clearSoundCloudPreference = () => {
+    try {
+      window.localStorage.removeItem(soundCloudPreferenceKey);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const initialiseSoundCloudPlayers = () => {
+    const controls = document.querySelector<HTMLElement>('[data-soundcloud-consent]');
+    if (!controls || controls.dataset.initialised === 'true') return;
+
+    const enableButton = controls.querySelector<HTMLButtonElement>('[data-enable-soundcloud]');
+    const disableButton = controls.querySelector<HTMLButtonElement>('[data-disable-soundcloud]');
+    const status = controls.querySelector<HTMLElement>('[data-soundcloud-status]');
+
+    if (!enableButton || !disableButton || !status) return;
+
+    controls.dataset.initialised = 'true';
+
+    const showEnabledState = (message: string) => {
+      enableButton.hidden = true;
+      disableButton.hidden = false;
+      status.textContent = message;
+    };
+
+    if (readSoundCloudPreference()) {
+      loadAllSoundCloudPlayers();
+      showEnabledState('Both SoundCloud playlists loaded automatically from your saved choice.');
+    }
+
+    enableButton.addEventListener('click', () => {
+      const preferenceSaved = saveSoundCloudPreference();
+      loadAllSoundCloudPlayers();
+      showEnabledState(
+        preferenceSaved
+          ? 'Both SoundCloud playlists are loaded. This choice will be remembered in this browser.'
+          : 'Both SoundCloud playlists are loaded for this visit. This browser could not remember the choice.',
+      );
+    });
+
+    disableButton.addEventListener('click', () => {
+      if (clearSoundCloudPreference()) {
+        window.location.reload();
+        return;
+      }
+
+      status.textContent = 'This browser could not clear the saved SoundCloud choice.';
+    });
+  };
+
+  initialiseSoundCloudPlayers();
+  document.addEventListener('astro:page-load', initialiseSoundCloudPlayers);
+</script>
