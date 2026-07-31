@@ -27,7 +27,7 @@ const hasPortraitImage = publicAssetExists(artistProfile.portraitImage);
       )}
     </figure>
     <div class="self-center">
-      <SectionHeading eyebrow="Biography" title={variant === 'long' ? 'Kai Hickinson / FLAWS' : 'Kai Hickinson / FLAWS'} />
+      <SectionHeading eyebrow="Biography" title="Kai Hickinson / FLAWS" />
       <div class="space-y-6 text-base leading-8 text-muted sm:text-lg">
         {(variant === 'long' ? artistProfile.longBio : shortParagraphs).map((paragraph) => <p>{paragraph}</p>)}
       </div>
