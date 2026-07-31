@@ -4,6 +4,8 @@ Official static-first artist website and EPK for **FLAWS**.
 
 This pre-launch v1 is built for **Cloudflare Pages** with Astro, TypeScript and Tailwind CSS. It uses only approved local content. Do not add invented releases, shows, quotes, contacts, links or imagery.
 
+See [`ROADMAP.md`](./ROADMAP.md) for the current project position and next delivery phases.
+
 ## Stack
 
 - [Astro](https://astro.build/) with `output: "static"`
@@ -77,10 +79,13 @@ Keep binary media in small, dedicated asset PRs. Do not combine large image or P
 
 ## SoundCloud players
 
-The Music page uses official SoundCloud embedded players for the approved releases/collaborations and podcasts/interviews playlists. The main profile remains available through the homepage listening action and official-profile links. Players are click-to-load rather than loaded during the initial page request. This protects initial performance and gives visitors a clear choice before their browser connects to SoundCloud.
+The Music page uses official SoundCloud embedded players for the approved releases/collaborations and podcasts/interviews playlists. The main profile remains available through the homepage listening action and official-profile links.
+
+On a visitor's first Music-page visit, SoundCloud remains disconnected until they choose one page-level **Enable SoundCloud playlists** control. That choice loads both players together and is remembered in browser local storage, allowing both players to load automatically on later visits. Visitors can disable automatic loading from the same page. Audio is never configured to autoplay.
 
 - Player destinations are managed in `src/data/links.ts`.
-- Player presentation and loading behaviour are managed by `src/components/SoundCloudEmbed.astro` and `src/components/SoundCloudPlayers.astro`.
+- Player presentation is managed by `src/components/SoundCloudEmbed.astro`.
+- Shared activation, remembered preference and automatic returning-visit loading are managed by `src/components/SoundCloudPlayers.astro`.
 - Keep the external SoundCloud fallback link for every player.
 - The privacy disclosure is published at `/privacy/`.
 
@@ -115,16 +120,18 @@ Included:
 - Approved FLAWS biography facts.
 - Approved SoundCloud, Instagram, Resident Advisor and Facebook profiles.
 - Embedded SoundCloud destinations for releases/labels/collaborations and podcasts/interviews.
+- One remembered SoundCloud choice that loads both playlists together and automatically restores them on later visits.
 - Approved Substack feature link.
 - Approved Parabel agency profile and representation email for Linda Nilsson / Parabel.
 - Verified release facts and approved cover artwork for `Motion` and the grouped FLOAT Records 2020 EPs.
 - Web-ready hero, portrait, press and live photography with safe missing-asset handling.
 - Direct EPK image downloads using approved local photography.
 - Production-ready black, white and square-avatar SVG brand assets.
-- Privacy disclosure and click-to-load handling for third-party SoundCloud players.
+- Privacy disclosure for third-party SoundCloud players and the locally stored preference.
 - Unified RA and non-RA event architecture with automatic sorting and structured data.
 - Five verified Resident Advisor archive dates.
 - Branded noindex 404 page and automated production-build validation.
+- Accepted interactive, photography-led homepage direction based on Kai's stakeholder feedback.
 
 Still missing until supplied, verified and approved for publication:
 
