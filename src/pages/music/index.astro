@@ -6,14 +6,14 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import { releases } from '@data/releases';
 ---
 
-<BaseLayout title="Music" description="Listen to FLAWS on SoundCloud and explore selected release context." pathname="/music/">
+<BaseLayout title="Music" description="Listen to FLAWS on SoundCloud and explore selected releases." pathname="/music/">
   <SoundCloudPlayers />
   <section class="px-4 pb-20 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
       <SectionHeading
         eyebrow="Catalogue"
         title="Selected releases"
-        copy="Verified release context from the FLAWS catalogue. SoundCloud remains the main listening destination."
+        copy="Selected releases from the FLAWS catalogue, with SoundCloud as the main listening destination."
       />
       <div class="grid gap-5 md:grid-cols-2">
         {releases.map((release) => <ReleaseCard release={release} />)}
