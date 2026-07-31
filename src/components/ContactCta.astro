@@ -3,14 +3,21 @@ import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
 import { artistProfile } from '@data/artistProfile';
 import { bookingLinks, contactLinks } from '@data/links';
+
+const isContactPage = Astro.url.pathname === '/contact/';
+const representationHeadingClass = 'mt-4 text-2xl font-black uppercase tracking-[-0.04em] text-fog';
 ---
 
 <section class="px-4 py-20 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl rounded-[2rem] border border-fog/10 bg-fog/[0.04] p-6 sm:p-10">
-    <SectionHeading eyebrow="Contact" title="Booking, press and direct requests" copy={`${artistProfile.name} is represented by ${artistProfile.representation}. Use the approved representation email for booking, press and general enquiries.`} />
+    <SectionHeading eyebrow="Contact" title="Booking, press and direct requests" copy={`${artistProfile.name} is represented by ${artistProfile.representation}. Use the approved representation email for booking, press and general enquiries.`} headingLevel={isContactPage ? 1 : 2} />
     <div class="rounded-3xl border border-fog/10 bg-ink/45 p-5">
       <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Representation</p>
-      <p class="mt-4 text-2xl font-black uppercase tracking-[-0.04em] text-fog">{artistProfile.representation}</p>
+      {isContactPage ? (
+        <h2 class={representationHeadingClass}>{artistProfile.representation}</h2>
+      ) : (
+        <h3 class={representationHeadingClass}>{artistProfile.representation}</h3>
+      )}
       <a class="focus-ring mt-4 inline-flex rounded-full text-sm font-bold text-muted underline-offset-4 transition hover:text-fog hover:underline" href={`mailto:${artistProfile.bookingEmail}`}>{artistProfile.bookingEmail}</a>
       <p class="mt-4 text-sm leading-7 text-muted">Booking, press and general enquiries.</p>
       <div class="mt-6 flex flex-wrap gap-3">
