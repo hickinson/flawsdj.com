@@ -10,7 +10,7 @@ const feature = pressFeatures[0];
 ---
 
 <BaseLayout title="Biography" description="Biography for FLAWS DJ, the rhythm-led techno DJ and producer project of Kai Hickinson." pathname="/about/" type="profile">
-  <BioSection variant="long" />
+  <BioSection variant="long" headingLevel={1} />
   <ArtistStatement />
   {feature && (
     <section class="px-4 py-16 sm:px-6 lg:px-8">
@@ -18,7 +18,7 @@ const feature = pressFeatures[0];
         <SectionHeading eyebrow="Feature" title="Further reading" copy="Read the approved external feature about FLAWS." />
         <article class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6 sm:p-8">
           <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Substack feature</p>
-          <h2 class="mt-4 max-w-4xl text-3xl font-black uppercase tracking-[-0.04em] text-fog sm:text-5xl">{feature.label}</h2>
+          <h3 class="mt-4 max-w-4xl text-3xl font-black uppercase tracking-[-0.04em] text-fog sm:text-5xl">{feature.label}</h3>
           {feature.note && <p class="mt-5 max-w-2xl text-base leading-8 text-muted">{feature.note}</p>}
           <ButtonLink class="mt-8" href={feature.href} external variant="primary">Read the article</ButtonLink>
         </article>

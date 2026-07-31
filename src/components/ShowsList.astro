@@ -11,6 +11,7 @@ type Props = {
 };
 
 const { variant = 'full' } = Astro.props;
+const isFullPage = variant === 'full';
 const upcomingShows = getUpcomingShows(shows);
 const pastShows = getPastShows(shows);
 const displayedUpcomingShows = variant === 'preview' ? upcomingShows.slice(0, 3) : upcomingShows;
@@ -18,15 +19,32 @@ const displayedUpcomingShows = variant === 'preview' ? upcomingShows.slice(0, 3)
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
-    <SectionHeading eyebrow="Gigs" title="Upcoming shows" copy="Confirmed dates and official event links will appear here once announced." />
-    <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] px-5 sm:px-8">
-      {displayedUpcomingShows.length > 0 ? displayedUpcomingShows.map((show) => <ShowCard show={show} />) : (
-        <div class="py-10">
-          <p class="text-2xl font-black uppercase tracking-[-0.04em] text-fog">Dates to be announced.</p>
-          <p class="mt-4 max-w-2xl text-base leading-7 text-muted">Follow the official Resident Advisor profile and social channels for announcements.</p>
-        </div>
+    {isFullPage ? (
+      <SectionHeading
+        eyebrow="Live"
+        title="Gigs"
+        copy="Confirmed dates, official event links and a selected archive of past shows."
+        headingLevel={1}
+      />
+    ) : (
+      <SectionHeading eyebrow="Gigs" title="Upcoming shows" copy="Confirmed dates and official event links will appear here once announced." />
+    )}
+
+    <section aria-labelledby={isFullPage ? 'upcoming-shows-heading' : undefined}>
+      {isFullPage && (
+        <h2 id="upcoming-shows-heading" class="mb-5 text-xs font-bold uppercase tracking-[0.3em] text-muted">
+          Upcoming shows
+        </h2>
       )}
-    </div>
+      <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] px-5 sm:px-8">
+        {displayedUpcomingShows.length > 0 ? displayedUpcomingShows.map((show) => <ShowCard show={show} />) : (
+          <div class="py-10">
+            <p class="text-2xl font-black uppercase tracking-[-0.04em] text-fog">Dates to be announced.</p>
+            <p class="mt-4 max-w-2xl text-base leading-7 text-muted">Follow the official Resident Advisor profile and social channels for announcements.</p>
+          </div>
+        )}
+      </div>
+    </section>
 
     {variant === 'preview' ? (
       <div class="mt-6 flex flex-wrap gap-3">
@@ -34,8 +52,8 @@ const displayedUpcomingShows = variant === 'preview' ? upcomingShows.slice(0, 3)
         <ButtonLink href={residentAdvisorLink.href} external>Resident Advisor</ButtonLink>
       </div>
     ) : (
-      <div class="mt-8 rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6 sm:p-8">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Past shows</p>
+      <section class="mt-8 rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6 sm:p-8" aria-labelledby="past-shows-heading">
+        <h2 id="past-shows-heading" class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Past shows</h2>
         {pastShows.length > 0 ? (
           <div class="mt-4">
             {pastShows.map((show) => <ShowCard show={show} />)}
@@ -43,7 +61,7 @@ const displayedUpcomingShows = variant === 'preview' ? upcomingShows.slice(0, 3)
         ) : (
           <p class="mt-5 text-sm leading-7 text-muted">{showArchiveNote}</p>
         )}
-      </div>
+      </section>
     )}
   </div>
 </section>

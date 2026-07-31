@@ -24,7 +24,7 @@ const showEpkLink = !isEpkPage;
 
 <section class="px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-7xl">
-    <SectionHeading eyebrow="EPK" title="Press / media essentials" copy="Official biography, highlights, approved media assets and professional links for FLAWS." />
+    <SectionHeading eyebrow="EPK" title="Press / media essentials" copy="Official biography, highlights, approved media assets and professional links for FLAWS." headingLevel={isEpkPage ? 1 : 2} />
 
     <div class="grid gap-4 lg:grid-cols-4">
       {artistProfile.highlights.map((highlight) => (
