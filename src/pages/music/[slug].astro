@@ -32,17 +32,15 @@ const seoImage = release.artwork ?? release.artworks?.[0]?.src;
         </div>
       </div>
     </div>
-    <div class="mx-auto mt-12 max-w-7xl rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6">
-      <h2 class="text-xs font-bold uppercase tracking-[0.36em] text-muted">Track list</h2>
-      {release.tracks.length > 0 ? (
+    {release.tracks.length > 0 && (
+      <div class="mx-auto mt-12 max-w-7xl rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6">
+        <h2 class="text-xs font-bold uppercase tracking-[0.36em] text-muted">Track list</h2>
         <ol class="mt-5 grid gap-3">
           {release.tracks.map((track, index) => (
             <li class="flex items-center gap-4 border-t border-fog/10 py-4 text-fog"><span class="text-muted">{String(index + 1).padStart(2, '0')}</span>{track}</li>
           ))}
         </ol>
-      ) : (
-        <p class="mt-5 text-sm leading-7 text-muted">Track list details are not currently available.</p>
-      )}
-    </div>
+      </div>
+    )}
   </section>
 </BaseLayout>
