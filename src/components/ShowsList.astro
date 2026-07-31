@@ -3,7 +3,7 @@ import ButtonLink from './ButtonLink.astro';
 import SectionHeading from './SectionHeading.astro';
 import ShowCard from './ShowCard.astro';
 import { residentAdvisorLink } from '@data/links';
-import { showArchiveNote, shows, showsDataNote } from '@data/shows';
+import { showArchiveNote, shows } from '@data/shows';
 import { getPastShows, getUpcomingShows } from '@utils/shows';
 
 type Props = {
@@ -34,22 +34,15 @@ const displayedUpcomingShows = variant === 'preview' ? upcomingShows.slice(0, 3)
         <ButtonLink href={residentAdvisorLink.href} external>Resident Advisor</ButtonLink>
       </div>
     ) : (
-      <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
-        <div class="rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6 sm:p-8">
-          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Past shows</p>
-          {pastShows.length > 0 ? (
-            <div class="mt-4">
-              {pastShows.map((show) => <ShowCard show={show} />)}
-            </div>
-          ) : (
-            <p class="mt-5 text-sm leading-7 text-muted">{showArchiveNote}</p>
-          )}
-        </div>
-        <aside class="rounded-[2rem] border border-fog/10 bg-panel/35 p-6">
-          <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Latest announcements</p>
-          <p class="mt-5 text-sm leading-7 text-muted">{showsDataNote}</p>
-          <ButtonLink href={residentAdvisorLink.href} external class="mt-6">Resident Advisor</ButtonLink>
-        </aside>
+      <div class="mt-8 rounded-[2rem] border border-fog/10 bg-fog/[0.03] p-6 sm:p-8">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-muted">Past shows</p>
+        {pastShows.length > 0 ? (
+          <div class="mt-4">
+            {pastShows.map((show) => <ShowCard show={show} />)}
+          </div>
+        ) : (
+          <p class="mt-5 text-sm leading-7 text-muted">{showArchiveNote}</p>
+        )}
       </div>
     )}
   </div>
