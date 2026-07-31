@@ -3,8 +3,10 @@ type Props = {
   eyebrow?: string;
   title: string;
   copy?: string;
+  headingLevel?: 1 | 2;
 };
-const { eyebrow, title, copy } = Astro.props;
+const { eyebrow, title, copy, headingLevel = 2 } = Astro.props;
+const headingClass = 'max-w-4xl text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] text-fog sm:text-6xl';
 ---
 
 <header class="mb-10 grid gap-5 md:grid-cols-[0.38fr_1fr] md:items-end">
@@ -12,7 +14,7 @@ const { eyebrow, title, copy } = Astro.props;
     {eyebrow && <p class="text-xs font-bold uppercase tracking-[0.34em] text-muted">{eyebrow}</p>}
   </div>
   <div>
-    <h2 class="max-w-4xl text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] text-fog sm:text-6xl">{title}</h2>
+    {headingLevel === 1 ? <h1 class={headingClass}>{title}</h1> : <h2 class={headingClass}>{title}</h2>}
     {copy && <p class="mt-5 max-w-2xl text-base leading-7 text-muted sm:text-lg">{copy}</p>}
   </div>
 </header>
