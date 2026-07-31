@@ -28,4 +28,4 @@ export const epkAssets: LinkItem[] = [
 ];
 
 export const epkDownloadsNote =
-  'Approved press photography is available to view and download below.';
+  'Press photography is available to view and download below.';
