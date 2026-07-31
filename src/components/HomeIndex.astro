@@ -1,0 +1,193 @@
+---
+import { artistProfile } from '@data/artistProfile';
+import { featuredRelease } from '@data/releases';
+import { shows } from '@data/shows';
+import { formatShowDate, getUpcomingShows } from '@utils/shows';
+
+const upcomingShow = getUpcomingShows(shows)[0];
+const releaseArtwork = featuredRelease.artwork ?? '/images/releases/Motion1.jpg';
+
+const destinations = [
+  {
+    number: '01',
+    label: 'Music',
+    href: '/music/',
+    meta: `${featuredRelease.title} · ${featuredRelease.label}`,
+    image: releaseArtwork,
+    imageAlt: featuredRelease.artworkAlt ?? `Artwork for ${featuredRelease.title} by FLAWS.`,
+  },
+  {
+    number: '02',
+    label: 'Gigs',
+    href: '/shows/',
+    meta: upcomingShow
+      ? `${formatShowDate(upcomingShow.startDate)} · ${upcomingShow.city}`
+      : 'Show archive · new dates',
+    image: '/images/misc/flaws-live.jpg',
+    imageAlt: 'Black and white live photograph of FLAWS performing behind a DJ setup beneath stage lights.',
+  },
+  {
+    number: '03',
+    label: 'About',
+    href: '/about/',
+    meta: 'Kai Hickinson · rhythm-led techno',
+    image: artistProfile.portraitImage,
+    imageAlt: artistProfile.portraitImageAlt,
+  },
+  {
+    number: '04',
+    label: 'EPK',
+    href: '/epk/',
+    meta: 'Biography · photography · downloads',
+    image: '/images/press/flaws-presshead.jpg',
+    imageAlt: 'Black and white portrait of FLAWS in a white jacket standing against a tree in woodland.',
+  },
+  {
+    number: '05',
+    label: 'Booking',
+    href: '/contact/',
+    meta: artistProfile.representation,
+    image: artistProfile.heroImage,
+    imageAlt: artistProfile.heroImageAlt,
+  },
+];
+---
+
+<section id="explore" class="relative px-4 py-20 sm:px-6 lg:px-8 lg:py-28" data-home-index>
+  <div class="mx-auto max-w-[96rem]">
+    <header class="mb-10 flex flex-col justify-between gap-4 border-b border-fog/20 pb-5 sm:flex-row sm:items-end">
+      <p class="text-xs font-bold uppercase tracking-[0.34em] text-muted">Explore FLAWS</p>
+      <p class="max-w-xl text-sm leading-6 text-muted sm:text-right">
+        Music, live dates, biography, press material and representation.
+      </p>
+    </header>
+
+    <div class="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
+      <figure class="relative hidden lg:block" aria-hidden="true">
+        <div class="sticky top-28 aspect-[4/5] max-h-[72svh] overflow-hidden bg-panel">
+          {destinations.map((destination, index) => (
+            <img
+              class="home-index-preview absolute inset-0 h-full w-full object-cover"
+              src={destination.image}
+              alt=""
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+              data-preview-image
+              data-active={index === 0 ? 'true' : 'false'}
+            />
+          ))}
+          <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_48%,rgba(0,0,0,0.82)_100%)]"></div>
+          <div class="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+            <p class="text-xs font-bold uppercase tracking-[0.3em] text-fog">Selected view</p>
+            <p class="text-xs uppercase tracking-[0.26em] text-fog/70">FLAWS / 2026</p>
+          </div>
+        </div>
+      </figure>
+
+      <nav aria-label="Explore the FLAWS website">
+        {destinations.map((destination, index) => (
+          <a
+            class="home-index-link group block border-t border-fog/20 py-5 last:border-b sm:py-7"
+            href={destination.href}
+            data-index-link
+            data-index={String(index)}
+            data-active={index === 0 ? 'true' : 'false'}
+          >
+            <span class="grid grid-cols-[auto_1fr_auto] items-baseline gap-4 sm:gap-6">
+              <span class="text-xs font-bold tabular-nums tracking-[0.24em] text-muted">{destination.number}</span>
+              <span class="min-w-0">
+                <span class="home-index-title block text-[clamp(3.1rem,8vw,8.5rem)] font-black uppercase leading-[0.78] tracking-[-0.075em] text-fog">
+                  {destination.label}
+                </span>
+                <span class="mt-4 block text-xs uppercase tracking-[0.2em] text-muted sm:text-sm">
+                  {destination.meta}
+                </span>
+              </span>
+              <span class="home-index-arrow text-3xl leading-none text-fog sm:text-5xl" aria-hidden="true">↗</span>
+            </span>
+            <img
+              class="mt-5 aspect-[16/10] w-full object-cover lg:hidden"
+              src={destination.image}
+              alt={destination.imageAlt}
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</section>
+
+<script>
+  const initialiseHomeIndexes = () => {
+    document.querySelectorAll<HTMLElement>('[data-home-index]').forEach((root) => {
+      if (root.dataset.indexInitialised === 'true') return;
+
+      const links = Array.from(root.querySelectorAll<HTMLElement>('[data-index-link]'));
+      const previews = Array.from(root.querySelectorAll<HTMLElement>('[data-preview-image]'));
+
+      const activate = (index: number) => {
+        links.forEach((link, linkIndex) => {
+          link.dataset.active = linkIndex === index ? 'true' : 'false';
+        });
+        previews.forEach((preview, previewIndex) => {
+          preview.dataset.active = previewIndex === index ? 'true' : 'false';
+        });
+      };
+
+      links.forEach((link, index) => {
+        link.addEventListener('pointerenter', () => activate(index));
+        link.addEventListener('focus', () => activate(index));
+      });
+
+      root.dataset.indexInitialised = 'true';
+    });
+  };
+
+  initialiseHomeIndexes();
+  document.addEventListener('astro:page-load', initialiseHomeIndexes);
+</script>
+
+<style>
+  .home-index-preview {
+    opacity: 0;
+    transform: scale(1.035);
+    transition:
+      opacity 420ms ease,
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .home-index-preview[data-active='true'] {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .home-index-title,
+  .home-index-arrow {
+    transition:
+      color 220ms ease,
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .home-index-link:hover .home-index-title,
+  .home-index-link:focus-visible .home-index-title,
+  .home-index-link[data-active='true'] .home-index-title {
+    transform: translateX(0.035em);
+  }
+
+  .home-index-link:hover .home-index-arrow,
+  .home-index-link:focus-visible .home-index-arrow,
+  .home-index-link[data-active='true'] .home-index-arrow {
+    transform: translate(0.12em, -0.12em);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-index-preview,
+    .home-index-title,
+    .home-index-arrow {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>
