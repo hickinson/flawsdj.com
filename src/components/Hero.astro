@@ -1,5 +1,4 @@
 ---
-import ButtonLink from './ButtonLink.astro';
 import { artistProfile } from '@data/artistProfile';
 import { soundCloudProfileLink } from '@data/links';
 import { publicAssetExists } from '@utils/assets';
@@ -7,32 +6,119 @@ import { publicAssetExists } from '@utils/assets';
 const hasHeroImage = publicAssetExists(artistProfile.heroImage);
 ---
 
-<section class="relative min-h-[calc(100svh-73px)] overflow-hidden px-4 py-12 sm:px-6 lg:px-8 lg:py-10">
-  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_70%_20%,rgba(245,245,245,0.12),transparent_24rem)]"></div>
-  <div class="mx-auto grid min-h-[calc(100svh-8rem)] max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-    <div class="py-8 lg:py-10">
-      <h1 class="max-w-5xl text-[clamp(4.8rem,17vw,15rem)] font-black uppercase leading-[0.76] tracking-[-0.1em] text-fog">{artistProfile.name}</h1>
-      <p class="mt-8 text-lg font-semibold uppercase tracking-[0.3em] text-fog">{artistProfile.artistType}</p>
-      <p class="mt-5 max-w-xl text-lg leading-8 text-muted">{artistProfile.tagline}</p>
-      <div class="mt-10 flex flex-wrap gap-3" aria-label="Primary actions">
-        <ButtonLink href={soundCloudProfileLink.href} variant="primary" external>Listen on SoundCloud</ButtonLink>
-        <ButtonLink href="/shows/">Gigs</ButtonLink>
-        <ButtonLink href="/epk/">EPK</ButtonLink>
-        <ButtonLink href="/contact/">Booking</ButtonLink>
-      </div>
+<section class="home-hero relative isolate min-h-[calc(100svh-73px)] overflow-hidden border-b border-fog/15">
+  {hasHeroImage ? (
+    <img
+      class="home-hero-media absolute inset-0 -z-20 h-full w-full object-cover object-[center_32%] grayscale"
+      src={artistProfile.heroImage}
+      alt={artistProfile.heroImageAlt}
+      loading="eager"
+      decoding="async"
+    />
+  ) : (
+    <div class="absolute inset-0 -z-20 bg-[linear-gradient(135deg,#242424,#050505_48%,#000)]" role="img" aria-label="FLAWS artist identity panel"></div>
+  )}
+
+  <div class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.18)_0%,rgba(0,0,0,0.08)_38%,rgba(0,0,0,0.9)_100%)]"></div>
+  <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_75%_20%,rgba(255,255,255,0.12),transparent_34rem)]"></div>
+
+  <div class="mx-auto flex min-h-[calc(100svh-73px)] max-w-[96rem] flex-col justify-between px-4 py-7 sm:px-6 sm:py-9 lg:px-8">
+    <div class="flex items-start justify-between gap-6 text-[0.65rem] font-bold uppercase tracking-[0.32em] text-fog/75 sm:text-xs">
+      <p>{artistProfile.artistType}</p>
+      <p class="text-right">{artistProfile.location}</p>
     </div>
-    <figure class="relative rounded-[2rem] border border-fog/10 bg-panel/35 p-4 shadow-2xl shadow-black/60">
-      {hasHeroImage ? (
-        <img class="aspect-[4/5] w-full rounded-[1.5rem] object-cover grayscale" src={artistProfile.heroImage} alt={artistProfile.heroImageAlt} loading="eager" decoding="async" />
-      ) : (
-        <div class="flex aspect-[4/5] flex-col justify-between rounded-[1.5rem] border border-fog/10 bg-[linear-gradient(135deg,rgba(245,245,245,0.13),rgba(24,24,24,0.7)_42%,rgba(0,0,0,0.92))] p-6" role="img" aria-label="FLAWS artist identity panel">
-          <p class="text-xs font-bold uppercase tracking-[0.34em] text-muted">FLAWS</p>
-          <div>
-            <p class="text-xs uppercase tracking-[0.28em] text-muted">Netherlands</p>
-            <p class="mt-4 max-w-sm text-2xl font-black uppercase leading-none tracking-[-0.04em] text-fog">Hypnotic. Deep. Rhythm-led.</p>
-          </div>
-        </div>
-      )}
-    </figure>
+
+    <div class="flex flex-1 items-center py-10">
+      <h1 class="home-hero-title w-full text-[clamp(6rem,23vw,22rem)] font-black uppercase leading-[0.7] tracking-[-0.105em] text-fog drop-shadow-[0_12px_38px_rgba(0,0,0,0.45)]">
+        {artistProfile.name}
+      </h1>
+    </div>
+
+    <div class="grid gap-8 border-t border-fog/25 pt-5 md:grid-cols-[1fr_auto] md:items-end">
+      <p class="max-w-2xl text-lg font-medium leading-7 text-fog sm:text-2xl sm:leading-8">
+        {artistProfile.tagline}
+      </p>
+
+      <nav class="flex flex-wrap gap-x-7 gap-y-3 text-xs font-bold uppercase tracking-[0.24em] text-fog" aria-label="Primary homepage actions">
+        <a class="home-hero-action focus-ring rounded-sm" href={soundCloudProfileLink.href} target="_blank" rel="noopener noreferrer">
+          Listen <span aria-hidden="true">↗</span><span class="sr-only"> on SoundCloud (opens in a new tab)</span>
+        </a>
+        <a class="home-hero-action focus-ring rounded-sm" href="/shows/">Gigs <span aria-hidden="true">↗</span></a>
+        <a class="home-hero-action focus-ring rounded-sm" href="/contact/">Booking <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
   </div>
+
+  <a class="focus-ring absolute bottom-8 left-1/2 hidden -translate-x-1/2 rounded-sm text-[0.65rem] font-bold uppercase tracking-[0.32em] text-fog/70 transition hover:text-fog lg:block" href="#explore">
+    Explore <span aria-hidden="true">↓</span>
+  </a>
 </section>
+
+<style>
+  .home-hero-media {
+    animation: hero-media-reveal 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .home-hero-title {
+    animation: hero-title-reveal 900ms 120ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .home-hero-action {
+    position: relative;
+    padding-block: 0.25rem;
+  }
+
+  .home-hero-action::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    background: currentColor;
+    transform: scaleX(0.28);
+    transform-origin: left;
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .home-hero-action:hover::after,
+  .home-hero-action:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  @keyframes hero-media-reveal {
+    from {
+      opacity: 0;
+      transform: scale(1.08);
+      filter: grayscale(1) contrast(1.18);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1.01);
+      filter: grayscale(1) contrast(1);
+    }
+  }
+
+  @keyframes hero-title-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(0.22em);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero-media,
+    .home-hero-title {
+      animation: none;
+      transform: none;
+    }
+
+    .home-hero-action::after {
+      transition: none;
+    }
+  }
+</style>
