@@ -1,18 +1,10 @@
 ---
-import ArtistStatement from '@components/ArtistStatement.astro';
-import ContactCta from '@components/ContactCta.astro';
-import EpkPreview from '@components/EpkPreview.astro';
 import Hero from '@components/Hero.astro';
-import LatestRelease from '@components/LatestRelease.astro';
-import ShowsList from '@components/ShowsList.astro';
+import HomeIndex from '@components/HomeIndex.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 ---
 
 <BaseLayout pathname="/">
   <Hero />
-  <ArtistStatement />
-  <LatestRelease />
-  <ShowsList variant="preview" />
-  <EpkPreview />
-  <ContactCta />
+  <HomeIndex />
 </BaseLayout>
